@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'SecureFileSystem.wsgi.application'
 
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
 # Path where media is stored

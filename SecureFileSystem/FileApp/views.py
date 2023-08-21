@@ -12,6 +12,7 @@ from django.urls import reverse
 from django.conf import settings
 from datetime import datetime, timedelta,timezone
 from django.http import JsonResponse
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -171,7 +172,34 @@ def captcha_refresh(request):
     return JsonResponse({'captcha_value': f'{make_password(captcha_value)}', 'captcha_url': '/captcha_images/CAPTCHA.png'})
 
 
-# def change_password_view(request):
-#     print("Change Password View ....")
+def change_password_view(request):
+    print("in change password view")
+    form = ChangePasswordUserForm()
+    try:
+        user = User.objects.get(username=request.user)
+        print("user ", user)
+        if request.method == 'POST':
+            form = ChangePasswordUserForm(request.POST)
+            if form.is_valid():
+                old_password = form.cleaned_data['old_password']
+                new_password = form.cleaned_data['new_password']
+                
+                print("old : ", old_password , " new : ", new_password)
+                if user.check_password(old_password):
+                    user.set_password(new_password)
+                    user.save()
+                    messages.success(request, 'Passowrd changed successfully', extra_tags='success')
+                else:
+                    messages.error(request, "Incorrect Old Password", extra_tags='danger')                
+            else:
+                print("invalid form")
+    except:
+        messages.error(request, "User Not Found", extra_tags='danger')
 
-#     form = 
+    return render(request, 'FileApp/ChangePassword.html', {'form':form})
+
+
+def forgot_password_view(request):
+    form = ForgotPasswordForm()
+    return render(request, 'FileApp/ForgetPassword.html',{'form':form})
+    

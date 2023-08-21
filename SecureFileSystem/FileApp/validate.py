@@ -48,8 +48,23 @@ def validate_change_password_user_form(self):
     print("VALIDATE.PY FILE : CHANGE PASSWORD FORM new_password --- ", new_password)
     print("VALIDATE.PY FILE : CHANGE PASSWORD FORM confirm_password --- ", confirm_password)
 
-    print("Validate.py File : Change User Password validations passed : Returning clean data ---")
+    print("Validate.py File : Change User Password Change validations passed : Returning clean data ---")
     return self.cleaned_data
+
+
+def validate_forgot_password_form(self):
+    print("VALIDATE.PY FILE: in validate_forgot_password_form function")
+    email = self.cleaned_data.get('email')
+    captcha_hidden = self.cleaned_data.get('captcha_hidden')
+    captcha_input = self.cleaned_data.get('captcha_input')
+
+    print("VALIDATE.PY FILE : FORGOT PASSWORD FORM EMAIL --- ", email)
+    print("VALIDATE.PY FILE : FORGOT PASSWORD FORM EMAIL --- ", captcha_hidden)
+    print("VALIDATE.PY FILE : FORGOT PASSWORD FORM EMAIL --- ", captcha_input)
+
+    print("Validate.py File : Change User Forgot Password validations passed : Returning clean data ---")
+    return self.cleaned_data
+
 
 
 
