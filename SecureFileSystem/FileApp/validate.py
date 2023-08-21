@@ -38,4 +38,18 @@ def validate_login_form(self):
     return self.cleaned_data
 
 
+def validate_change_password_user_form(self):
+    print("VALIDATE.PY FILE: in change_password_creation_form function")
+    old_password = self.cleaned_data.get('old_password')
+    new_password = self.cleaned_data.get('new_password')
+    confirm_password = self.cleaned_data.get('confirm_password')
+
+    print("VALIDATE.PY FILE : CHANGE PASSWORD FORM old_password --- ", old_password)
+    print("VALIDATE.PY FILE : CHANGE PASSWORD FORM new_password --- ", new_password)
+    print("VALIDATE.PY FILE : CHANGE PASSWORD FORM confirm_password --- ", confirm_password)
+
+    print("Validate.py File : Change User Password validations passed : Returning clean data ---")
+    return self.cleaned_data
+
+
 

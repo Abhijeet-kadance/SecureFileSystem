@@ -171,3 +171,7 @@ def captcha_refresh(request):
     return JsonResponse({'captcha_value': f'{make_password(captcha_value)}', 'captcha_url': '/captcha_images/CAPTCHA.png'})
 
 
+# def change_password_view(request):
+#     print("Change Password View ....")
+
+#     form = 
