@@ -112,5 +112,45 @@ def user_activate_view(request,uid64,token):
         return render(request,'FileApp/Registeration_form.html')
     
 def login_view(request):
-    return render(request,'FileApp/Login.html')
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            print("username : " + username + " password : " + password)
+
+            try:
+                if User.objects.filter(username=username,is_active=False):
+                    print("User is not acive...")
+                else:
+                    user = authenticate(username=username,password=password)
+                    print(user)
+                    if user is not None:
+                        login(request,user)
+                        return redirect('dashboard')
+                    else:
+                        print("User Credentials Incorrect ....")
+            except:
+                print("Something went Wrong Try login Again")
+        else:
+            print("Form is invalid")
+            captcha_value = random_captcha_generator()
+            captcha_img_generator(captcha_value)
+            form.data['captcha_input'] = ''
+            form.data['captcha_hidden'] = make_password(captcha_value)
+    else:
+        form = LoginForm()
+        captcha_value = random_captcha_generator()
+        captcha_img_generator(captcha_value)
+        print("captcha value ", captcha_value)
+        form.fields['captcha_hidden'].initial = make_password(captcha_value)
+
+    return render(request,'FileApp/Login.html',{'form':form})
+
+
+def dashboard_view(request):
+    return render(request,'FileApp/Dashboard.html')
+
+
 
