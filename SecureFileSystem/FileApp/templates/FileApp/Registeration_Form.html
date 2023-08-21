@@ -1,6 +1,6 @@
 {% extends 'FileApp/index.html' %}
 {% load static %}
-{% block becomeuaready %}
+{% block register %}
 <style>
   .header_design{
     color: var(--gray-900, #101828);
@@ -15,6 +15,24 @@
 
     <div class="container">
 
+      <div>
+        {% if messages %} 
+        {% for message in messages %}
+        <div class="alert alert-{{message.extra_tags}} alert-dismissible" role="alert">
+          <strong> {% if message.tags %}{{message}}{% endif %}</strong>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+
+      <div style="color: red">
+        {% if form.non_field_errors %} 
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+          <strong>{{ error|escape }}</strong>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+      
       <form method="POST" novalidate>
         {% csrf_token %}
         <div class="form-group">
