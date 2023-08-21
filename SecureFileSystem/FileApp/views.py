@@ -11,6 +11,7 @@ from django.contrib.auth.hashers import make_password
 from django.urls import reverse
 from django.conf import settings
 from datetime import datetime, timedelta,timezone
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -149,8 +150,24 @@ def login_view(request):
     return render(request,'FileApp/Login.html',{'form':form})
 
 
+def logout_view(request):
+    
+    logout(request)
+    
+    # messages.success(request, "You are successfully logged Out", extra_tags="success")
+    return redirect("login")
+
 def dashboard_view(request):
     return render(request,'FileApp/Dashboard.html')
 
+
+def captcha_refresh(request):
+    print("In captcha refresh method")
+
+    captcha_value = random_captcha_generator()
+    captcha_img_generator(captcha_value)
+    print("captcha Value ", captcha_value)
+
+    return JsonResponse({'captcha_value': f'{make_password(captcha_value)}', 'captcha_url': '/captcha_images/CAPTCHA.png'})
 
 

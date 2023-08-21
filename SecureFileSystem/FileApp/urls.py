@@ -11,5 +11,7 @@ urlpatterns = [
     path('register',views.regiter_view,name='register_view'),
     path('activate/<uid64>/<token>',views.user_activate_view,name='user_activate'),
     path('login',views.login_view,name='login'),
+    path('logout',views.logout_view,name='logout'),
     path('dashboard',views.dashboard_view,name='dashboard'),
+    path('captcha_refresh/', views.captcha_refresh, name='captcha_refresh'),  # added by shivam sharma
 ]
