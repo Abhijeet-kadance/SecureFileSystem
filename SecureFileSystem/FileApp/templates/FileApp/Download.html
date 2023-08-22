@@ -7,18 +7,13 @@
 </h1>
 
 <div class="page-content" id="main-content">
+
+    <!-- Main Container -->
     <div class="container">
-       <div class="row d-flex justify-content-end">
- 
-          <div class="col-lg-12">
- 
-          </div>
- 
-       </div>
+        <!-- Outer Row -->
        <div class="row">
-          <div class="col-lg-3 col-12 ">
+          <div class="col-lg-3">
              <div class="filter-clear">
- 
                 <div class="bg-body-tertiary p-4 search-filter shadow">
                    <div class="card-body">
                       <div class="filter-widget mb-0">
@@ -57,6 +52,7 @@
                             <div class="d-flex justify-content-center mt-2">
                                <button class="btn btn-primary mb-3 me-3" type="submit"
                                   value="Fetch">Filter</button>
+                            </div>
                          </form>
                          <form action="#" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -64,61 +60,86 @@
                             <button class="btn btn-primary mb-3" type="submit" value="Fetch">Reset</button>
                          </form>
                       </div>
- 
- 
                    </div>
                 </div>
              </div>
- 
           </div>
-       </div>
-       <div class="col-lg-9 bg-body-tertiary p-4 shadow">
- 
-          <div class="row">
-       
-             <div class="col-lg-12 col-md-6 col-sm-12 col-12 d-flex">
-                <div class="ua-card-header--list flex-fill">
-                   <div class="ua-card-header--img">
+      
+
+       <div class="col-lg-9 ">
+          <div class="row bg-body-tertiary p-3 shadow">
+             <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
                       <a href="#">
-                         <img class="img-fluid" alt="Iconic image of document {{document.Document_Name}} "
-                            src="{% static 'core/assets/img/documents/document-img.jpg' %}">
+                        <svg style="height: 170px;width:170px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="research-paper"><circle cx="38" cy="24" r="7" fill="#78b9eb"></circle><path fill="#78b9eb" d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"></path><rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect><path fill="#1e81ce" d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"></path><path fill="#1e81ce" d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"></path><rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect><path fill="#1e81ce" d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"></path><path fill="#1e81ce" d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"></path></svg>
                       </a>
-                   </div>
-                   <div class="ua-card-header--content">
-                    
-                   
-                      <h3 class="h2"><a href="#"
-                            target="_blank">document.Document_Name </a></h3>
-                    
- 
-                      <div class="ua-card-header--info">
-                         <div class="date-img d-flex align-items-center">
-                            <img src="assets/img/icon/icon-01.svg" class="me-1" alt="">
-                            <p>document.Document_CreationDate</p>
- 
-                            
-                         </div>
-                      </div>
-                      <div class="ua-card-header--badge">
- 
-                         <span class="web-badge">Category : document.Document_CategoryType </span>
-                         
-                      </div>
-                   </div>
+             </div>
+             <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
+                <h2><a href="#" style="text-decoration: none;font-weight: 700;">File Title</a></h2> 
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nihil. Corrupti quae, eius possimus at dolores repellat, neque repellendus voluptates blanditiis deserunt omnis id beatae ipsam, tempore excepturi eum reiciendis.</p>
+                <div class="badge" style="color: black;">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Added On 12/03/2005
                 </div>
+                <div class="download">
+                    <button class="btn btn-primary">Download</button>
+                    <button class="btn btn-primary">Write a Review</button>
+                </div>
+                
              </div>
           </div>
+          
+          
+          <div class="row bg-body-tertiary p-3 shadow mt-2">
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+                     <a href="#">
+                       <svg style="height: 170px;width:170px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="research-paper"><circle cx="38" cy="24" r="7" fill="#78b9eb"></circle><path fill="#78b9eb" d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"></path><rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect><path fill="#1e81ce" d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"></path><path fill="#1e81ce" d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"></path><rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect><path fill="#1e81ce" d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"></path><path fill="#1e81ce" d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"></path></svg>
+                     </a>
+            </div>
+            <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
+               <h2><a href="#" style="text-decoration: none;font-weight: 700;">File Title</a></h2> 
+               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nihil. Corrupti quae, eius possimus at dolores repellat, neque repellendus voluptates blanditiis deserunt omnis id beatae ipsam, tempore excepturi eum reiciendis.</p>
+               <div class="badge" style="color: black;">
+                   <i class="fa fa-calendar" aria-hidden="true"></i> Added On 12/03/2005
+               </div>
+               <div class="download">
+                   <button class="btn btn-primary">Download</button>
+                   <button class="btn btn-primary">Write a Review</button>
+               </div>
+               
+            </div>
+         </div>
+
+         <div class="row bg-body-tertiary p-3 shadow mt-2">
+            <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+                     <a href="#">
+                       <svg style="height: 170px;width:170px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="research-paper"><circle cx="38" cy="24" r="7" fill="#78b9eb"></circle><path fill="#78b9eb" d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"></path><rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect><path fill="#1e81ce" d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"></path><path fill="#1e81ce" d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"></path><rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect><path fill="#1e81ce" d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"></path><path fill="#1e81ce" d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"></path></svg>
+                     </a>
+            </div>
+            <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
+               <h2><a href="#" style="text-decoration: none;font-weight: 700;">File Title</a></h2> 
+               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nihil. Corrupti quae, eius possimus at dolores repellat, neque repellendus voluptates blanditiis deserunt omnis id beatae ipsam, tempore excepturi eum reiciendis.</p>
+               <div class="badge" style="color: black;">
+                   <i class="fa fa-calendar" aria-hidden="true"></i> Added On 12/03/2005
+               </div>
+               <div class="download">
+                   <button class="btn btn-primary">Download</button>
+                   <button class="btn btn-primary">Write a Review</button>
+               </div>
+               
+            </div>
+         </div>
+         
+         
         </div>
-       </div>
+        
+    </div>
+ 
  
        <!-- <div class="shadow-lg p-3  bg-body-tertiary rounded-3 p-3">
           <div style="text-align: justify">
              <strong>&nbsp Disclaimer : </strong><small></small>
           </div>
        </div> -->
- 
- 
-    </div>
+
  </div>
  
  
