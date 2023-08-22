@@ -1,0 +1,20 @@
+xljy1_material table contains all the Data related to the download material 
+
+Download Material
+    - user_is
+    - title
+    - product_type
+    - contributed by
+    - product summary 
+    - publish type ( via_dvd , via_portal)
+    - product file file path (only if published via portal)
+    - License type
+    - Performance Document 
+    - Sample Data
+    - paper type
+    - author 
+    - author email
+    - publish date
+    - status
+    - consortia email 
+    - last updated date
