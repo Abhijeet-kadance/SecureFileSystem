@@ -41,6 +41,7 @@ def regiter_view(request):
                 print('User does not exist')
                 user = User.objects.create(email=email, username=email)
                 user.set_password(password)
+                user.is_active = False
                 user.save()
             else:
                 user = User.objects.get(username=email)
@@ -51,6 +52,7 @@ def regiter_view(request):
                     user.save()
                 else:
                     print("User Already Exists....")
+                    messages.error(request, "User Already Exists", extra_tags='danger') 
                     return render(request,"FileApp/Registeration_Form.html",{'form':form})
                 
             if not user == None:
@@ -68,7 +70,8 @@ def regiter_view(request):
                 try:
                     send_mail(subject="Registration Successful",message='',from_email=settings.DEFAULT_FROM_EMAIL,recipient_list=[email],fail_silently=False,html_message="Your registration is successful. To activate your accout please click on activation link:  "+'</br><a href={0}>{0}</a>'.format(activate_link))
                     print("Email Sent SuccessFully !!!")
-
+                    messages.success(request, 'User Registered Successfully. Please Check mail for Activation Link !!!', extra_tags='success')
+                    return redirect('register_view')
                 except:
                     print("Email Not Sent !!!")
         else:
@@ -100,12 +103,14 @@ def user_activate_view(request,uid64,token):
 
     if (expiry_date > datetime.now(timezone.utc)):
         if user is not None and account_activation_token.check_token(user,token):
-            user.isactive = True
+            user.is_active = True
             user.save()
             print("User activation Done ....")
+            messages.success(request, "User has been activated.", extra_tags='danger') 
         else:
             if user.is_active == True:
                 print("User already Activated..")
+                messages.success(request, 'User Already Activated', extra_tags='success')
             else:
                 form = RegisterForm()
                 return render(request,'FileApp/Registeration_form.html',context={"form":form})
@@ -125,6 +130,7 @@ def login_view(request):
             try:
                 if User.objects.filter(username=username,is_active=False):
                     print("User is not acive...")
+                    messages.error(request, "User is not Active", extra_tags='danger') 
                 else:
                     user = authenticate(username=username,password=password)
                     print(user)
@@ -133,8 +139,10 @@ def login_view(request):
                         return redirect('dashboard')
                     else:
                         print("User Credentials Incorrect ....")
+                        messages.error(request, "Incorrect User Credentials", extra_tags='danger') 
             except:
                 print("Something went Wrong Try login Again")
+                messages.error(request, "Something went Wrong Try login Again", extra_tags='danger') 
         else:
             print("Form is invalid")
             captcha_value = random_captcha_generator()

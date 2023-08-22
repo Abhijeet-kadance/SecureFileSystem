@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 import re
 from datetime import *
+from django.contrib.auth.hashers import check_password
 
 
 
@@ -13,12 +14,31 @@ def validate_registerform(self):
     register_captcha_hidden = self.cleaned_data.get('captcha_hidden')
     register_captcha_input = self.cleaned_data.get('captcha_input')
 
-    print("Validate.py File : Register User Name --- ", register_user_name)
-    # print("Validate.py File : Register Original Password --- ", register_original_password)
-    # print("Validate.py File : Register Confirm Password --- ", register_confirm_password)
-    # print("Validate.py File : Register Hidden Captch Input  --- ", register_captcha_hidden)
-    # print("Validate.py File : Register Captch Input --- ", register_captcha_input)
+    ## email reg with NON-ASCII characters
+    email_regex = re.compile(r'^[\w]+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')
 
+    password_regex = re.compile(
+        r'(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+!=])[a-zA-Z0-9@#$%^&+!=]{8,20}') 
+    
+    if register_user_name == None or len(register_user_name) > 60:
+        print("VALIDATE.PY FILE : REGISTER FORM USERNAME VALIDATION FAILED ERROR RAISED")
+        raise forms.ValidationError("Enter Valid Email")
+    if register_original_password == None or not re.fullmatch(password_regex, register_original_password):
+        print("VALIDATE.PY FILE : REGISTER FORM PASSWORD VALIDATION FAILED ERROR RAISED")
+        raise forms.ValidationError("Enter Valid Password")
+    if register_confirm_password == None or not re.fullmatch(password_regex, register_original_password):
+        print("VALIDATE.PY FILE : REGISTER FORM CONFIRM PASSWORD VALIDATION FAILED ERROR RAISED")
+        raise forms.ValidationError("Enter valid confirm password")
+    if register_captcha_input is None:
+        print("VALIDATE.PY FILE : REGISTER FORM captcha_input VALIDATION FAILED ERROR RAISED ")
+        raise forms.ValidationError("Please Enter Captcha")
+    if len(register_captcha_input) > 5:
+        print("VALIDATE.PY FILE : REGISTER FORM captcha_input VALIDATION FAILED ERROR RAISED ")
+        raise forms.ValidationError("Captcha value must be of 5 charatcters only")
+    if not check_password(register_captcha_input,register_captcha_hidden):
+        print("VALIDATE.PY FILE : REGISTER FORM captcha_hidden VALIDATION FAILED ERROR RAISED ")
+        raise forms.ValidationError("Invalid Captcha")
+    
 
     print("Validate.py File : Register validations passed : Returning clean data ---")
     return self.cleaned_data
