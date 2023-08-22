@@ -14,65 +14,71 @@
     <h1 class="text-center header_design py-2">Registration Form</h1>
 
     <div class="container">
-
-      <div>
-        {% if messages %} 
-        {% for message in messages %}
-        <div class="alert alert-{{message.extra_tags}} alert-dismissible" role="alert">
-          <strong> {% if message.tags %}{{message}}{% endif %}</strong>
+      <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+          <div>
+            {% if messages %} 
+            {% for message in messages %}
+            <div class="alert alert-{{message.extra_tags}} alert-dismissible" role="alert">
+              <strong> {% if message.tags %}{{message}}{% endif %}</strong>
+            </div>
+            {% endfor %} {% endif %}
+          </div>
+    
+          <div style="color: red">
+            {% if form.non_field_errors %} 
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+              <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %} {% endif %}
+          </div>
+          
+          <form method="POST" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="Feedback_Email" class="form-label">Email</label>
+                {{form.email}}
+              </div>
+              <div class="form-group">
+                <label for="Feedback_Email" class="form-label">Password <i class="fa fa-question-circle fa-sm" aria-hidden="true" title="Password must contain minimum 8 characters with minimum 1 uppercase character, 1 lowercase character, 1 number and 1 special symbol"></i></label>
+                {{form.original_password}}
+      
+              </div>
+              <div class="form-group">
+                <label for="Feedback_Email" class="form-label">Confirm Password</label>
+                {{form.confirm_password}}
+    
+              </div>
+    
+              <div class="form-outline mb-4 mt-2">
+                <div class="row">
+                  <div class="col-sm-12 col-lg-5">
+                    <label class="mb-1 fs-5 fw-semibold px-1" for="inputCaptcha">Captcha</label>
+                    {{form.captcha_input}}
+                    {{form.captcha_hidden}}
+                  </div>
+                  <div class="col-sm-12 col-lg-5 mt-2">
+                    <img class="img-fluid" src='/media/captcha_images/CAPTCHA.png' alt="Captcha" id="captcha-img" width="220">
+                    <i class="fa fa-refresh fa-lg m-2" aria-hidden="true" id="refresh_button"></i>
+                    <!-- <i class="fa-solid fa-volume-high" name="speaker" onclick="readaudio()"></i> -->
+                  </div>
+                </div>
+              </div>
+    
+            <div class=" mt-3">
+              <button class="btn btn-primary btn-lg">Register</button>
+            </div>
+    
+        </form>
+    
         </div>
-        {% endfor %} {% endif %}
-      </div>
-
-      <div style="color: red">
-        {% if form.non_field_errors %} 
-        {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">
-          <strong>{{ error|escape }}</strong>
+        
         </div>
-        {% endfor %} {% endif %}
+        <div class="col-lg-3"></div>
       </div>
       
-      <form method="POST" novalidate>
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="Feedback_Email" class="form-label">Email</label>
-            {{form.email}}
-          </div>
-          <div class="form-group">
-            <label for="Feedback_Email" class="form-label">Password <i class="fa fa-question-circle fa-sm" aria-hidden="true" title="Password must contain minimum 8 characters with minimum 1 uppercase character, 1 lowercase character, 1 number and 1 special symbol"></i></label>
-            {{form.original_password}}
-  
-          </div>
-          <div class="form-group">
-            <label for="Feedback_Email" class="form-label">Confirm Password</label>
-            {{form.confirm_password}}
-
-          </div>
-
-          <div class="form-outline mb-4 mt-2">
-            <div class="row">
-              <div class="col-sm-12 col-lg-5">
-                <label class="mb-1 fs-5 fw-semibold px-1" for="inputCaptcha">Captcha</label>
-                {{form.captcha_input}}
-                {{form.captcha_hidden}}
-              </div>
-              <div class="col-sm-12 col-lg-5 mt-2">
-                <img class="img-fluid" src='/media/captcha_images/CAPTCHA.png' alt="Captcha" id="captcha-img" width="220">
-                <i class="fa fa-refresh fa-lg m-2" aria-hidden="true" id="refresh_button"></i>
-                <!-- <i class="fa-solid fa-volume-high" name="speaker" onclick="readaudio()"></i> -->
-              </div>
-            </div>
-          </div>
-
-        <div class=" mt-3">
-          <button class="btn btn-primary btn-lg">Register</button>
-        </div>
-
-    </form>
-
-    </div>
-    
 
     <script>
       $('#captcha-img').attr('src', '/media/captcha_images/CAPTCHA.png' + "?t="+new Date().getTime())

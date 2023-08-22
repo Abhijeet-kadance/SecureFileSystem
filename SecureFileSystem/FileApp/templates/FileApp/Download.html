@@ -1,0 +1,128 @@
+{% extends 'FileApp/index.html' %}
+{% load static %}
+{% block download %}
+
+<h1 class="text-center header_design py-2">
+    Download Corner
+</h1>
+
+<div class="page-content" id="main-content">
+    <div class="container">
+       <div class="row d-flex justify-content-end">
+ 
+          <div class="col-lg-12">
+ 
+          </div>
+ 
+       </div>
+       <div class="row">
+          <div class="col-lg-3 col-12 ">
+             <div class="filter-clear">
+ 
+                <div class="bg-body-tertiary p-4 search-filter shadow">
+                   <div class="card-body">
+                      <div class="filter-widget mb-0">
+                         <div class="categories-head d-flex align-items-center">
+                            <h2 class="h5">Categories</h2>
+                            <i class="fas fa-angle-down"></i>
+                         </div>
+ 
+                         <form action="#" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div>
+                               <label class="custom_check">
+                                  <input type="checkbox" name="select_specialist"
+                                     value="{{ category.DocumentCategory_Name }}"> 
+                                  <span class="checkmark">Text to Speech</span>
+                               </label>
+                            </div>
+                        
+                            <div>
+                               <label class="custom_check">
+                                  <input type="checkbox" name="select_specialist"
+                                     value="{{ category.DocumentCategory_Name }}" checked>
+                                  <span class="checkmark">Translation</span>
+                               </label>
+                            </div>
+            
+                            <div>
+                               <label class="custom_check">
+                                  <input type="checkbox" name="select_specialist"
+                                     value="{{ category.DocumentCategory_Name }}">
+                                  <span class="checkmark">Transliteration</span>
+                               </label>
+                            </div>
+                         
+                            <div class="d-flex justify-content-center mt-2">
+                               <button class="btn btn-primary mb-3 me-3" type="submit"
+                                  value="Fetch">Filter</button>
+                         </form>
+                         <form action="#" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!-- <button class="btn btn-primary mb-3" type="submit" value="Fetch"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button> -->
+                            <button class="btn btn-primary mb-3" type="submit" value="Fetch">Reset</button>
+                         </form>
+                      </div>
+ 
+ 
+                   </div>
+                </div>
+             </div>
+ 
+          </div>
+       </div>
+       <div class="col-lg-9 bg-body-tertiary p-4 shadow">
+ 
+          <div class="row">
+       
+             <div class="col-lg-12 col-md-6 col-sm-12 col-12 d-flex">
+                <div class="ua-card-header--list flex-fill">
+                   <div class="ua-card-header--img">
+                      <a href="#">
+                         <img class="img-fluid" alt="Iconic image of document {{document.Document_Name}} "
+                            src="{% static 'core/assets/img/documents/document-img.jpg' %}">
+                      </a>
+                   </div>
+                   <div class="ua-card-header--content">
+                    
+                   
+                      <h3 class="h2"><a href="#"
+                            target="_blank">document.Document_Name </a></h3>
+                    
+ 
+                      <div class="ua-card-header--info">
+                         <div class="date-img d-flex align-items-center">
+                            <img src="assets/img/icon/icon-01.svg" class="me-1" alt="">
+                            <p>document.Document_CreationDate</p>
+ 
+                            
+                         </div>
+                      </div>
+                      <div class="ua-card-header--badge">
+ 
+                         <span class="web-badge">Category : document.Document_CategoryType </span>
+                         
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+        </div>
+       </div>
+ 
+       <!-- <div class="shadow-lg p-3  bg-body-tertiary rounded-3 p-3">
+          <div style="text-align: justify">
+             <strong>&nbsp Disclaimer : </strong><small></small>
+          </div>
+       </div> -->
+ 
+ 
+    </div>
+ </div>
+ 
+ 
+ 
+ </div>
+
+{% endblock %}

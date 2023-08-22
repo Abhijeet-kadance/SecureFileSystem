@@ -202,4 +202,7 @@ def change_password_view(request):
 def forgot_password_view(request):
     form = ForgotPasswordForm()
     return render(request, 'FileApp/ForgetPassword.html',{'form':form})
+
+def download_view(request):
+    return render(request, 'FileApp/Download.html')
     
