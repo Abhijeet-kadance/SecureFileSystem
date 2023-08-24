@@ -216,11 +216,23 @@ def forgot_password_view(request):
 def download_view(request):
     
     download_obj = Material.objects.all()
+    # print("Email :",request.user.email)
+    # user = request.user.email
     # print(request.POST().get('download'))
     if request.method == 'POST':
-        print(request.POST.get('download'))
-        # for item in download_obj.all():
-        #     print(item.Material_Title)
+        if request.POST.get('download') == None:
+            messages.error(request, "Please Accept Terms and Conditions !!", extra_tags='danger')           
+            print("Please Accept Terms and Conditions")
+        else:
+            messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
+            # print(request.POST.get('download'))
+            Material_id = request.POST.get('download')
+            Material_obj = Material.objects.get(pk=Material_id)
+            print("Material Object :",Material_obj)
+            b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
+            b.save()
+            
+
         
 
     context = {
