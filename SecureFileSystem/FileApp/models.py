@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.timezone import now
 from django.core.validators import FileExtensionValidator
+from django.contrib.auth.models import User
 
 class Material(models.Model):
     Material_Title = models.CharField(max_length=200)
-    Material_Contributor = models.CharField(max_length=200)
+    Material_Contributor = models.ForeignKey(User, verbose_name="Material Contributor", on_delete=models.CASCADE)
     Material_Summary = models.TextField()
     Material_Last_Updated_Date = models.DateTimeField(auto_now=True)
     Materail_Created_Date = models.DateTimeField(auto_now_add=True)
