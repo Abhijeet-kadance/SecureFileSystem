@@ -13,7 +13,7 @@
   <div class="container">
     <!-- Outer Row -->
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3 mt-2">
         <div class="filter-clear">
           <div class="bg-body-tertiary p-4 search-filter shadow">
             <div class="card-body">
@@ -87,9 +87,11 @@
         </div>
       </div>
 
-      {% for data in download_obj %}
+     
       <div class="col-lg-9">
-        <div class="row bg-body-tertiary p-3 shadow">
+         {% for data in download_obj %}
+         {% if data.Material_Published_Status == "Published" %}
+        <div class="row bg-body-tertiary p-3 mt-2 shadow">
           <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
             <a href="#">
               <svg
@@ -134,18 +136,15 @@
           <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
             <h2>
               <a href="#" style="text-decoration: none; font-weight: 700"
-                >{{ data}}</a
+                >{{ data.Material_Title }}</a
               >
             </h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Aspernatur, nihil. Corrupti quae, eius possimus at dolores
-              repellat, neque repellendus voluptates blanditiis deserunt omnis
-              id beatae ipsam, tempore excepturi eum reiciendis.
+               {{ data.Material_Summary }}
             </p>
             <div class="badge" style="color: black">
               <i class="fa fa-calendar" aria-hidden="true"></i> Added On
-              12/03/2005
+              {{ data.Materail_Created_Date }}
             </div>
             <div class="download">
               <button class="btn btn-primary" id="MybtnModal">Download</button>
@@ -153,10 +152,12 @@
             </div>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
       </div>
+      
     </div>
-
+  
     <!-- <div class="shadow-lg p-3  bg-body-tertiary rounded-3 p-3">
           <div style="text-align: justify">
              <strong>&nbsp Disclaimer : </strong><small></small>
