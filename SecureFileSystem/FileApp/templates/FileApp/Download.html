@@ -290,12 +290,16 @@
         to change without notice.
       </div>
       <div class="modal-footer">
-         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-         <label for="vehicle1"> I have read the terms and condition and Accept them all..</label><br>
-         
-         <button type="button" class="btn btn-primary">
-          Submit
-        </button>
+         <form  method="POST">
+            {% csrf_token %}
+            <input type="checkbox" id="download" name="download" value="download">
+            <label for="vehicle1"> I have read the terms and condition and Accept them all..</label>
+            <span>
+               <button type="button" class="btn btn-primary">
+                  Submit Request
+               </button>
+            </span>
+         </form>
       </div>
     </div>
   </div>

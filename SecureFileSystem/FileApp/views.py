@@ -214,10 +214,14 @@ def forgot_password_view(request):
     return render(request, 'FileApp/ForgetPassword.html',{'form':form})
 
 def download_view(request):
+    
     download_obj = Material.objects.all()
-
+    print(request.POST())
     context = {
         "download_obj": download_obj
     }
     return render(request, 'FileApp/Download.html',context)
+
+# def download_request(request):
+#     return render(request, 'FileApp/Download.html')
     
