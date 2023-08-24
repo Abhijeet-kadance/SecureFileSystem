@@ -15,6 +15,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -266,13 +267,13 @@ def admin_material_approval(request):
             messages.error(request, "Material does not exist")
     
     materials_for_approval = MaterialApproval.objects.filter(Approval_Status='---')
-    approved_materials = MaterialApproval.objects.filter(Approval_Status='YES')
-    not_approved_materials = MaterialApproval.objects.filter(Approval_Status='NO')
+    approved_materials = MaterialApproval.objects.filter(Q(Approval_Status='YES') | Q(Approval_Status='NO'))
+    # not_approved_materials = MaterialApproval.objects.filter(Approval_Status='NO')
     
     context = {
         "materials_for_approval": materials_for_approval,
         "approved_materials" : approved_materials,
-        "not_approved_materials" : not_approved_materials
+        # "not_approved_materials" : not_approved_materials
     }
     
     return render(request, 'FileApp/admin_material_approval.html', context)
@@ -281,3 +282,12 @@ def admin_material_approval(request):
 # def download_request(request):
 #     return render(request, 'FileApp/Download.html')
     
+    
+
+def user_download_requests(request):
+    
+    download_material_requests = MaterialApproval.objects.filter(Requested_User=request.user)
+    context = {
+        "download_material_requests": download_material_requests
+    }
+    return render(request, 'FileApp/user_download_requests.html', context)

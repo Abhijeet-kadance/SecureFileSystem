@@ -11,8 +11,9 @@
       </div>
 
       <section class="container">
-        <h3>Approval Requests </h3>
+        <h3>New Requests </h3>
         <hr>
+        {% if materials_for_approval %}
         {% for data in materials_for_approval %}
         <div class="card mb-3">
           <div class="card-body">
@@ -38,21 +39,37 @@
           </div>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="mb-4 text-info-emphasis fs-5 fw-bold">No New Approval Request Found !</div>
+        {% endif %}
       </section>
 
       <section class="container">
-        <h3>Approved Requests </h3>
+        <h3>Past Requests :</h3>
         <hr>
+        {% if approved_materials %}
         {% for data in approved_materials %}
         <div class="card mb-3">
           <div class="card-body">
             <h5 class="card-title">{{data.Material.Material_Title}}</h5>
             <p class="card-text">{{data.Material.Material_Summary|slice:":300"}}...<a href="#">Read More</a></p>
             <p class="card-text"><strong>Requested By : </strong>{{data.Requested_User.username}}</p>
+            <p class="card-text"><strong>Approval Status : </strong>
+              {% if data.Approval_Status == 'YES' %}
+                <span class="text-success fw-bold">Approved</span>
+              {% elif data.Approval_Status == 'NO' %}
+                <span class="text-danger fw-bold">Declined</span>
+              {% else %}
+                <span class="text-primary fw-bold">Pending</span>
+              {% endif %}
+            </p>
             <p class="card-text"><small class="text-body-secondary">{{data.Material_Approval_Request_Date|date}}</small></p>
           </div>
         </div>
-        {% endfor %}
+        {% endfor %}  
+        {% else %}
+          <div class="mb-4 text-info-emphasis fs-5 fw-bold">No Past Approval Request Found</div>
+        {% endif %}
 
       </section>
     </div>
