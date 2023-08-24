@@ -1,0 +1,60 @@
+{% extends 'FileApp/index.html' %}
+{% load static %}
+{% block admin_material_approval %}
+
+    <div>
+      <div>
+        <h1 class="text-center">
+          Material Details For Approval
+        </h1>
+        <hr>
+      </div>
+
+      <section class="container">
+        <h3>Approval Requests </h3>
+        <hr>
+        {% for data in materials_for_approval %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{data.Material.Material_Title}}</h5>
+            <p class="card-text">{{data.Material.Material_Summary|slice:":300"}}...<a href="#">Read More</a></p>
+            <p class="card-text"><strong>Requested By : </strong>{{data.Requested_User.username}}</p>
+            <p class="card-text"><small class="text-body-secondary">{{data.Material_Approval_Request_Date|date}}</small></p>
+            <div>
+              <div>
+                {% for message in messages %}
+                  {{message}}
+                {% endfor %}
+              </div>
+              <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="material_id" value="{{data.id}}">
+                <label for="approvematerial" class="fw-bold text-primary">Approve : </label>
+                <input id="approvematerial" type="radio" name="approval_status" value='yes' class="mx-2" required> <strong>Yes</strong>
+                <input id="approvematerial" type="radio" name="approval_status" value='no' class="mx-2" required> <strong>No</strong>
+                <button type="submit" class="btn btn-primary mx-3">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </section>
+
+      <section class="container">
+        <h3>Approved Requests </h3>
+        <hr>
+        {% for data in approved_materials %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{data.Material.Material_Title}}</h5>
+            <p class="card-text">{{data.Material.Material_Summary|slice:":300"}}...<a href="#">Read More</a></p>
+            <p class="card-text"><strong>Requested By : </strong>{{data.Requested_User.username}}</p>
+            <p class="card-text"><small class="text-body-secondary">{{data.Material_Approval_Request_Date|date}}</small></p>
+          </div>
+        </div>
+        {% endfor %}
+
+      </section>
+    </div>
+    
+{% endblock %}

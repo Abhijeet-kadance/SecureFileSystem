@@ -220,4 +220,41 @@ def download_view(request):
         "download_obj": download_obj
     }
     return render(request, 'FileApp/Download.html',context)
+
+
+def admin_material_approval(request):
+    
+    if request.method == "POST":
+        print("In POST method")    
+        approval_status = request.POST.get('approval_status')
+        material_id = request.POST.get('material_id')
+        print("Material ID : ", material_id)
+        try:
+            material_approval_obj = MaterialApproval.objects.get(id=material_id)
+            print(material_approval_obj)
+            if approval_status == 'yes':
+                print("approval status : YES")
+                
+                MaterialApproval.objects.filter(id=material_approval_obj.id).update(Approval_Status='YES')
+                
+            elif approval_status == 'no':
+                print("approval status : NO")
+                MaterialApproval.objects.filter(id=material_approval_obj.id).update(Approval_Status='NO')
+            else:
+                print("approval status : None")
+                messages.error(request, "Please choose valid category")
+        except:
+            messages.error(request, "Material does not exist")
+    
+    materials_for_approval = MaterialApproval.objects.filter(Approval_Status='---')
+    approved_materials = MaterialApproval.objects.filter(Approval_Status='YES')
+    not_approved_materials = MaterialApproval.objects.filter(Approval_Status='NO')
+    
+    context = {
+        "materials_for_approval": materials_for_approval,
+        "approved_materials" : approved_materials,
+        "not_approved_materials" : not_approved_materials
+    }
+    
+    return render(request, 'FileApp/admin_material_approval.html', context)
     

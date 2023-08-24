@@ -27,7 +27,7 @@ class MaterialApproval(models.Model):
     Approval_Status = models.CharField(max_length=20, choices=[("YES", "YES"), ("NO", "NO"), ("---", "---")], default="---")
     Requested_User = models.ForeignKey(User, verbose_name="Requested User", on_delete=models.CASCADE) 
     Material_Approval_Request_Date = models.DateTimeField(auto_now_add=True)
-    Material_Approval_Date = models.DateTimeField()
+    Material_Approval_Date = models.DateTimeField(blank=True, null=True)
     
     class Meta:
         verbose_name_plural = "Material Approval"
