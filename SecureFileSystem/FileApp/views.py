@@ -217,6 +217,7 @@ def forgot_password_view(request):
 def download_view(request):
     
     download_obj = Material.objects.all()
+    download_approval_obj = MaterialApproval.objects.all()
     # print("Email :",request.user.email)
     # user = request.user.email
     # print(request.POST().get('download'))
@@ -232,12 +233,10 @@ def download_view(request):
             print("Material Object :",Material_obj)
             b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
             b.save()
-            
-
-        
 
     context = {
-        "download_obj": download_obj
+        "download_obj": download_obj,
+        "download_approval_obj":download_approval_obj
     }
     return render(request, 'FileApp/Download.html',context)
 
