@@ -14,6 +14,7 @@ from datetime import datetime, timedelta,timezone
 from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 # Create your views here.
 def index(request):
@@ -213,5 +214,10 @@ def forgot_password_view(request):
     return render(request, 'FileApp/ForgetPassword.html',{'form':form})
 
 def download_view(request):
-    return render(request, 'FileApp/Download.html')
+    download_obj = Material.objects.all()
+
+    context = {
+        "download_obj": download_obj
+    }
+    return render(request, 'FileApp/Download.html',context)
     
