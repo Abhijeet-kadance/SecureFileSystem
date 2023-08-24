@@ -17,5 +17,6 @@ urlpatterns = [
     path('change_password',views.change_password_view,name='change_password'),
     path('forgot_password',views.forgot_password_view,name='forgot_password'),
     path('download',views.download_view,name='download'),
-    # path('admin_material_approval',views.admin_material_approval,name='admin_material_approval')
+    path('admin_material_approval',views.admin_material_approval,name='admin_material_approval'),
+    path('user_download_requests',views.user_download_requests,name='user_download_requests'),
 ]

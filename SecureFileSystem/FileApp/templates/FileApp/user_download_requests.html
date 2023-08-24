@@ -1,0 +1,37 @@
+{% extends 'FileApp/index.html' %}
+{% load static %}
+{% block user_download_requests %}
+
+    <div>
+      <div>
+        <h1 class="text-center">
+          Material Details For Approval
+        </h1>
+        <hr>
+      </div>
+
+      <section class="container">
+        <h3>Download Requests</h3>
+        {% for data in download_material_requests %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{data.Material.Material_Title}}</h5>
+            <p class="card-text">{{data.Material.Material_Summary|slice:":300"}}...<a href="#">Read More</a></p>
+            <p class="card-text"><strong>Approval Status : </strong>
+              {% if data.Approval_Status == 'YES' %}
+                <span class="text-success fw-bold">Approved</span>
+              {% elif data.Approval_Status == 'NO' %}
+                <span class="text-danger fw-bold">Declined</span>
+              {% else %}
+                <span class="text-primary fw-bold">Pending</span>
+              {% endif %}
+            </p>
+            <p class="card-text"><small class="text-body-secondary">{{data.Material_Approval_Request_Date|date}}</small></p>
+          </div>
+        </div>
+        {% endfor %}
+
+      </section>
+    </div>
+    
+{% endblock %}
