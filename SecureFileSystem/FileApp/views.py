@@ -13,6 +13,7 @@ from django.conf import settings
 from datetime import datetime, timedelta,timezone
 from django.http import JsonResponse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -158,7 +159,7 @@ def login_view(request):
 
     return render(request,'FileApp/Login.html',{'form':form})
 
-
+@login_required()
 def logout_view(request):
     
     logout(request)

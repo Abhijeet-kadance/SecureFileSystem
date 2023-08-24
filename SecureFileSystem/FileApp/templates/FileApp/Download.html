@@ -1,149 +1,431 @@
-{% extends 'FileApp/index.html' %}
-{% load static %}
-{% block download %}
-
-<h1 class="text-center header_design py-2">
-    Download Corner
-</h1>
+{% extends 'FileApp/index.html' %} {% load static %} {% block download %}
+<script>
+  $(document).ready(function () {
+    $("#MybtnModal").click(function () {
+      $("#Mymodal").modal("show");
+    });
+  });
+</script>
+<h1 class="text-center header_design py-2">Download Corner</h1>
 
 <div class="page-content" id="main-content">
-
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Outer Row -->
-       <div class="row">
-          <div class="col-lg-3">
-             <div class="filter-clear">
-                <div class="bg-body-tertiary p-4 search-filter shadow">
-                   <div class="card-body">
-                      <div class="filter-widget mb-0">
-                         <div class="categories-head d-flex align-items-center">
-                            <h2 class="h5">Categories</h2>
-                            <i class="fas fa-angle-down"></i>
-                         </div>
- 
-                         <form action="#" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            
-                            <div>
-                               <label class="custom_check">
-                                  <input type="checkbox" name="select_specialist"
-                                     value="{{ category.DocumentCategory_Name }}"> 
-                                  <span class="checkmark">Text to Speech</span>
-                               </label>
-                            </div>
-                        
-                            <div>
-                               <label class="custom_check">
-                                  <input type="checkbox" name="select_specialist"
-                                     value="{{ category.DocumentCategory_Name }}" checked>
-                                  <span class="checkmark">Translation</span>
-                               </label>
-                            </div>
-            
-                            <div>
-                               <label class="custom_check">
-                                  <input type="checkbox" name="select_specialist"
-                                     value="{{ category.DocumentCategory_Name }}">
-                                  <span class="checkmark">Transliteration</span>
-                               </label>
-                            </div>
-                         
-                            <div class="d-flex justify-content-center mt-2">
-                               <button class="btn btn-primary mb-3 me-3" type="submit"
-                                  value="Fetch">Filter</button>
-                            </div>
-                         </form>
-                         <form action="#" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <!-- <button class="btn btn-primary mb-3" type="submit" value="Fetch"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button> -->
-                            <button class="btn btn-primary mb-3" type="submit" value="Fetch">Reset</button>
-                         </form>
-                      </div>
-                   </div>
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Outer Row -->
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="filter-clear">
+          <div class="bg-body-tertiary p-4 search-filter shadow">
+            <div class="card-body">
+              <div class="filter-widget mb-0">
+                <div class="categories-head d-flex align-items-center">
+                  <h2 class="h5">Categories</h2>
+                  <i class="fas fa-angle-down"></i>
                 </div>
-             </div>
+
+                <form action="#" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                  <div>
+                    <label class="custom_check">
+                      <input
+                        type="checkbox"
+                        name="select_specialist"
+                        value="{{ category.DocumentCategory_Name }}"
+                      />
+                      <span class="checkmark">Text to Speech</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="custom_check">
+                      <input
+                        type="checkbox"
+                        name="select_specialist"
+                        value="{{ category.DocumentCategory_Name }}"
+                        checked
+                      />
+                      <span class="checkmark">Translation</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label class="custom_check">
+                      <input
+                        type="checkbox"
+                        name="select_specialist"
+                        value="{{ category.DocumentCategory_Name }}"
+                      />
+                      <span class="checkmark">Transliteration</span>
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mt-2">
+                    <button
+                      class="btn btn-primary mb-3 me-3"
+                      type="submit"
+                      value="Fetch"
+                    >
+                      Filter
+                    </button>
+                  </div>
+                </form>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <!-- <button class="btn btn-primary mb-3" type="submit" value="Fetch"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button> -->
+                  <button
+                    class="btn btn-primary mb-3"
+                    type="submit"
+                    value="Fetch"
+                  >
+                    Reset
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
-      
-
-       <div class="col-lg-9 ">
-          <div class="row bg-body-tertiary p-3 shadow">
-             <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
-                      <a href="#">
-                        <svg style="height: 170px;width:170px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="research-paper"><circle cx="38" cy="24" r="7" fill="#78b9eb"></circle><path fill="#78b9eb" d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"></path><rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect><path fill="#1e81ce" d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"></path><path fill="#1e81ce" d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"></path><rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect><path fill="#1e81ce" d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"></path><path fill="#1e81ce" d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"></path></svg>
-                      </a>
-             </div>
-             <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
-                <h2><a href="#" style="text-decoration: none;font-weight: 700;">File Title</a></h2> 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nihil. Corrupti quae, eius possimus at dolores repellat, neque repellendus voluptates blanditiis deserunt omnis id beatae ipsam, tempore excepturi eum reiciendis.</p>
-                <div class="badge" style="color: black;">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> Added On 12/03/2005
-                </div>
-                <div class="download">
-                    <button class="btn btn-primary">Download</button>
-                    <button class="btn btn-primary">Write a Review</button>
-                </div>
-                
-             </div>
-          </div>
-          
-          
-          <div class="row bg-body-tertiary p-3 shadow mt-2">
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
-                     <a href="#">
-                       <svg style="height: 170px;width:170px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="research-paper"><circle cx="38" cy="24" r="7" fill="#78b9eb"></circle><path fill="#78b9eb" d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"></path><rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect><path fill="#1e81ce" d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"></path><path fill="#1e81ce" d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"></path><rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect><path fill="#1e81ce" d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"></path><path fill="#1e81ce" d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"></path></svg>
-                     </a>
-            </div>
-            <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
-               <h2><a href="#" style="text-decoration: none;font-weight: 700;">File Title</a></h2> 
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nihil. Corrupti quae, eius possimus at dolores repellat, neque repellendus voluptates blanditiis deserunt omnis id beatae ipsam, tempore excepturi eum reiciendis.</p>
-               <div class="badge" style="color: black;">
-                   <i class="fa fa-calendar" aria-hidden="true"></i> Added On 12/03/2005
-               </div>
-               <div class="download">
-                   <button class="btn btn-primary">Download</button>
-                   <button class="btn btn-primary">Write a Review</button>
-               </div>
-               
-            </div>
-         </div>
-
-         <div class="row bg-body-tertiary p-3 shadow mt-2">
-            <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
-                     <a href="#">
-                       <svg style="height: 170px;width:170px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="research-paper"><circle cx="38" cy="24" r="7" fill="#78b9eb"></circle><path fill="#78b9eb" d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"></path><rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect><path fill="#1e81ce" d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"></path><path fill="#1e81ce" d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"></path><rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect><rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect><rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect><path fill="#1e81ce" d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"></path><path fill="#1e81ce" d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"></path></svg>
-                     </a>
-            </div>
-            <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
-               <h2><a href="#" style="text-decoration: none;font-weight: 700;">File Title</a></h2> 
-               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, nihil. Corrupti quae, eius possimus at dolores repellat, neque repellendus voluptates blanditiis deserunt omnis id beatae ipsam, tempore excepturi eum reiciendis.</p>
-               <div class="badge" style="color: black;">
-                   <i class="fa fa-calendar" aria-hidden="true"></i> Added On 12/03/2005
-               </div>
-               <div class="download">
-                   <button class="btn btn-primary">Download</button>
-                   <button class="btn btn-primary">Write a Review</button>
-               </div>
-               
-            </div>
-         </div>
-         
-         
         </div>
-        
+      </div>
+
+      <div class="col-lg-9">
+        <div class="row bg-body-tertiary p-3 shadow">
+          <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+            <a href="#">
+              <svg
+                style="height: 170px; width: 170px"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                id="research-paper"
+              >
+                <circle cx="38" cy="24" r="7" fill="#78b9eb"></circle>
+                <path
+                  fill="#78b9eb"
+                  d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"
+                ></path>
+                <rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect>
+                <path
+                  fill="#1e81ce"
+                  d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"
+                ></path>
+                <path
+                  fill="#1e81ce"
+                  d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"
+                ></path>
+                <rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect>
+                <path
+                  fill="#1e81ce"
+                  d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"
+                ></path>
+                <path
+                  fill="#1e81ce"
+                  d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
+            <h2>
+              <a href="#" style="text-decoration: none; font-weight: 700"
+                >File Title</a
+              >
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aspernatur, nihil. Corrupti quae, eius possimus at dolores
+              repellat, neque repellendus voluptates blanditiis deserunt omnis
+              id beatae ipsam, tempore excepturi eum reiciendis.
+            </p>
+            <div class="badge" style="color: black">
+              <i class="fa fa-calendar" aria-hidden="true"></i> Added On
+              12/03/2005
+            </div>
+            <div class="download">
+              <button class="btn btn-primary" id="MybtnModal">Download</button>
+              <button class="btn btn-primary">Write a Review</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row bg-body-tertiary p-3 shadow mt-2">
+          <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+            <a href="#">
+              <svg
+                style="height: 170px; width: 170px"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                id="research-paper"
+              >
+                <circle cx="38" cy="24" r="7" fill="#78b9eb"></circle>
+                <path
+                  fill="#78b9eb"
+                  d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"
+                ></path>
+                <rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect>
+                <path
+                  fill="#1e81ce"
+                  d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"
+                ></path>
+                <path
+                  fill="#1e81ce"
+                  d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"
+                ></path>
+                <rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect>
+                <path
+                  fill="#1e81ce"
+                  d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"
+                ></path>
+                <path
+                  fill="#1e81ce"
+                  d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
+            <h2>
+              <a href="#" style="text-decoration: none; font-weight: 700"
+                >File Title</a
+              >
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aspernatur, nihil. Corrupti quae, eius possimus at dolores
+              repellat, neque repellendus voluptates blanditiis deserunt omnis
+              id beatae ipsam, tempore excepturi eum reiciendis.
+            </p>
+            <div class="badge" style="color: black">
+              <i class="fa fa-calendar" aria-hidden="true"></i> Added On
+              12/03/2005
+            </div>
+            <div class="download">
+              <button class="btn btn-primary">Download</button>
+              <button class="btn btn-primary">Write a Review</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row bg-body-tertiary p-3 shadow mt-2">
+          <div class="col-lg-3 col-md-6 col-sm-12 d-flex">
+            <a href="#">
+              <svg
+                style="height: 170px; width: 170px"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                id="research-paper"
+              >
+                <circle cx="38" cy="24" r="7" fill="#78b9eb"></circle>
+                <path
+                  fill="#78b9eb"
+                  d="M26.733,31.633,24,33l-2.733-1.367A6.007,6.007,0,0,0,18.584,31H7.08A.08.08,0,0,1,7,30.92V5H3V34H21l1,2h4l1-2h2V31.024A6,6,0,0,0,26.733,31.633Z"
+                ></path>
+                <rect width="4" height="8" x="41" y="5" fill="#78b9eb"></rect>
+                <path
+                  fill="#1e81ce"
+                  d="M7.08,32h11.5a5.024,5.024,0,0,1,2.235.528L23.553,33.9c.014.007.031,0,.046.01a.894.894,0,0,0,.8,0c.015-.006.032,0,.046-.01l2.734-1.367A5.024,5.024,0,0,1,29.416,32V30a7.037,7.037,0,0,0-3.13.739L25,31.382V5.618l2.181-1.09A5.024,5.024,0,0,1,29.416,4H40V14h2V3.08A1.081,1.081,0,0,0,40.92,2h-11.5a7.037,7.037,0,0,0-3.13.739L24,3.882,21.714,2.739A7.037,7.037,0,0,0,18.584,2H7.08A1.081,1.081,0,0,0,6,3.08V30.92A1.081,1.081,0,0,0,7.08,32ZM8,4H18.584a5.024,5.024,0,0,1,2.235.528L23,5.618V31.382l-1.286-.643A7.037,7.037,0,0,0,18.584,30H8Z"
+                ></path>
+                <path
+                  fill="#1e81ce"
+                  d="M25.553 34.658L25.382 35H22.618l-.171-.342A2.985 2.985 0 0 0 19.764 33H4V6H5V4H3A1 1 0 0 0 2 5V34a1 1 0 0 0 1 1H19.764a.993.993 0 0 1 .894.553l.447.894A1 1 0 0 0 22 37h4a1 1 0 0 0 .895-.553l.447-.894A.993.993 0 0 1 28.236 35H33V33H28.236A2.985 2.985 0 0 0 25.553 34.658zM45 4H43V6h1V16h2V5A1 1 0 0 0 45 4z"
+                ></path>
+                <rect width="10" height="2" x="10" y="6" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="10" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="14" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="18" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="22" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="10" y="26" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="28" y="6" fill="#1e81ce"></rect>
+                <rect width="10" height="2" x="28" y="10" fill="#1e81ce"></rect>
+                <path
+                  fill="#1e81ce"
+                  d="M38,16a8,8,0,0,0-1,15.931v2.253A3,3,0,0,0,35,37v6a3,3,0,0,0,6,0V37a3,3,0,0,0-2-2.816V31.931A8,8,0,0,0,38,16Zm1,27a1,1,0,0,1-2,0V37a1,1,0,0,1,2,0ZM38,30a6,6,0,1,1,6-6A6.006,6.006,0,0,1,38,30Z"
+                ></path>
+                <path
+                  fill="#1e81ce"
+                  d="M34,24h2a2,2,0,0,1,2-2V20A4,4,0,0,0,34,24Z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          <div class="col-lg-9 col-md-6 col-sm-12 col-12 d-flex flex-wrap">
+            <h2>
+              <a href="#" style="text-decoration: none; font-weight: 700"
+                >File Title</a
+              >
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Aspernatur, nihil. Corrupti quae, eius possimus at dolores
+              repellat, neque repellendus voluptates blanditiis deserunt omnis
+              id beatae ipsam, tempore excepturi eum reiciendis.
+            </p>
+            <div class="badge" style="color: black">
+              <i class="fa fa-calendar" aria-hidden="true"></i> Added On
+              12/03/2005
+            </div>
+            <div class="download">
+              <button class="btn btn-primary">Download</button>
+              <button class="btn btn-primary">Write a Review</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
- 
- 
-       <!-- <div class="shadow-lg p-3  bg-body-tertiary rounded-3 p-3">
+
+    <!-- <div class="shadow-lg p-3  bg-body-tertiary rounded-3 p-3">
           <div style="text-align: justify">
              <strong>&nbsp Disclaimer : </strong><small></small>
           </div>
        </div> -->
+  </div>
+</div>
 
- </div>
- 
- 
- 
- </div>
+<div class="modal fade" id="Mymodal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal">×</button>
+        <h4 class="modal-title">Terms and Conditions</h4>
+      </div>
+      <div class="modal-body">
+        This notice and terms and conditions mentioned here pertains to Ministry
+        of Electronics and Information Technology, Govt. of India, Data Centre
+        Website "www.tdil-dc.in" here after referred to as "this Website". All
+        content of this Website is owned or controlled by MeitY and is protected
+        by worldwide copyright laws. “This Website” contains information,
+        artwork, text, video, audio, software tools and technologies,
+        documentation, etc used only for information and also for use by a valid
+        download license holder only. You must not modify or use the Materials
+        for any other purpose without MeitY's express written consent. By using
+        and/or downloading any Materials from MeitY's Web site, you will be
+        deemed to agree to these terms: Ownership of Materials Software and
+        Documentation Information Enforcement of Intellectual Property Rights
+        Feedback and Information Warranties and Disclaimers Arbitrations Updates
+        Ownership of Materials The Materials contained in this site is
+        copyrighted and must not be distributed, modified, reproduced in whole
+        or in part without the written consent of MeitY prior to usage. Software
+        and Documentation Information 1. Documentation MeitY provides
+        documentation to explain how to use the resources available on this
+        website. Any person is hereby authorized to: a) store this documentation
+        on a single computer for personal use only and b) print copies of
+        documentation for personal use only, provided that the documentation
+        contains MeitY's copyright notice. You may want to download a copy of
+        the Materials for your personal, non-commercial internal use only by
+        getting the permission from MeitY. This is a personal license, and under
+        no circumstances shall this license be construed as a transfer of title
+        to any Materials found at this Site. The license granted by MeitY herein
+        is subject to the following restrictions: You must not: (a) modify the
+        Materials or use them for any commercial purpose, or any public display,
+        performance, sale or rental except and only to the extent permitted by
+        applicable law or specific license;(b) Decompile, reverse engineer, or
+        disassemble software Materials except and only to the extent permitted
+        by applicable law or specific license; (c) remove any copyright or other
+        proprietary notices from the Materials; (d) transfer the Materials to
+        another person; (e) use any such Materials on any other Website or
+        networked computer environment. You agree to prevent any unauthorized
+        copying of the Materials. MeitY will terminate this license at any time
+        if you are in breach of the terms of this Agreement. Upon termination,
+        you will immediately destroy the Materials. 2. Third Party Companies and
+        Products Mention of some third-party products, companies and Web sites
+        on the MeitY's Web site is only for informational purposes and
+        constitutes neither an endorsement nor a recommendation, unless
+        otherwise indicated. MeitY assumes no responsibility with regard to the
+        selection, performance or use of these products or vendors. MeitY
+        provides this only as a convenience to our users. This is to inform you
+        that the above mentioned third party products, companies and Web sites
+        are independent of MeitY and MeitY has no control over the contents,
+        selection, performance or use of such third party Web sites. A link to a
+        other Websites does not mean that MeitY endorses or accepts any
+        responsibility for the content or use of such Website. Enforcement of
+        Intellectual Property Rights MeitY actively and aggressively enforces
+        its intellectual property rights to the fullest extent of the law.
+        Feedback and Information Any information and/or feedback you provide at
+        this site shall be deemed to be non-confidential. MeitY shall be free to
+        use such information on an unrestricted basis. MeitY will be free to
+        copy, disclose, distribute, incorporate and otherwise use the
+        submissions and all data, images, sound, text or other content embodied
+        therein for any purposes it deems fit, commercial or non-commercial,
+        without liability or compensation to any person or entity. (Also refer
+        to MeitY Privacy Policy.) The sender of any communications to the MeitY
+        Web site or otherwise to the owners of this site shall be responsible
+        for the content and information contained therein, including its
+        truthfulness and accuracy. Warranties and Disclaimers MeitY intends that
+        the information and data contained in the MeitY Data Centre Website to
+        be accurate and reliable, however, since the information and data have
+        been compiled by MeitY from a variety of sources, it is provided on "AS
+        IS" basis. 1) MeitY EXPRESSLY DISCLAIMS, ALL WARRANTIES AND/OR
+        CONDITIONS, EXPRESSED OR IMPLIED, AS TO ANY MATTER WHATSOEVER RELATING
+        TO OR REFERENCED BY THE MeitY WEB SITE, INCLUDING, BUT NOT LIMITED TO,
+        THE IMPLIED WARRANTIES AND/OR CONDITIONS OF MERCHANTABILITY OR
+        SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE AND NON
+        INFRINGEMENT. 2) IN NO EVENT SHALL MeitY OR ITS' LICENSORS/SUPPLIERS BE
+        LIABLE FOR ANY DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION,
+        DAMAGES FOR LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF INFORMATION)
+        ARISING OUT OF THE USE OF OR INABILITY TO USE THE MATERIALS, EVEN IF
+        MeitY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. 3) MeitY ALSO
+        DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE MATERIALS WILL BE
+        UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT
+        THIS SITE OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR
+        OTHER HARMFUL COMPONENTS. 4) YOU UNDERSTAND AND AGREE THAT ANY MATERIALS
+        DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE SITE IS AT YOUR
+        OWN DISCRETION AND RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY
+        DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE
+        DOWNLOAD OF MATERIALS. 5) MeitY DOES NOT GIVE ANY WARRANTY REGARDING ANY
+        GOODS OR SERVICES OBTAINED THROUGH THE SITE OR ANY TRANSACTIONS ENTERED
+        INTO THROUGH THE SITE. 6) UNDER NO CIRCUMSTANCES SHALL MeitY BE LIABLE
+        FOR ANY DIRECT, INDIRECT, INCIDENTAL, PUNITIVE, SPECIAL OR CONSEQUENTIAL
+        DAMAGES, RESULTING FROM: (A) THE USE OR THE INABILITY TO USE THE SITE;
+        (B) MESSAGES RECEIVED OR TRANSACTIONS ENTERED INTO THROUGH THE SITE; (C)
+        THE MATERIALS IN THE SITE; (D) ANY OTHER MATTER RELATED TO THE SITE,
+        EVEN IF MeitY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+        BECAUSE SOME JURISDICTIONS PROHIBIT THE EXCLUSION OR LIMITATION OF
+        LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION
+        MAY NOT APPLY TO YOU. MeitY may provide access to MeitYs' international
+        data and, therefore, may contain references or cross references to MeitY
+        products, programs and services that are not announced in your country.
+        Such reference does not imply that MeitY in your country intends to
+        announce such products, programs or services. Arbitrations This Website
+        is controlled by MeitY from its offices in New Delhi in the State of
+        Delhi within the Union of India. Those who choose to access this Website
+        from other locations do so on their own initiative and are responsible
+        for compliance with applicable local laws, if and to the extent that
+        local laws are applicable. Any claim relating to the Materials shall be
+        governed by the laws of the Union of India. Any dispute or difference
+        arising for the use of this site or in the interpretation of this
+        agreement/notice shall be referred to the webmaster at MeitY. The
+        decision of the webmaster shall be final and binding. In the event of a
+        dispute, the jurisdiction for the settling shall be in the courts in
+        Delhi, India only. Updates MeitY reserves the right to revise, change or
+        modify these Terms at any time by updating this posting or by inserting
+        legal notices located on particular pages at this Site. Please remember
+        to visit this page from time to time to review any amendments to the
+        above Terms and their effect on your use of this Site and the Materials
+        contained therein. The information contained in this Website is subject
+        to change without notice.
+      </div>
+      <div class="modal-footer">
+         <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+         <label for="vehicle1"> I have read the terms and condition and Accept them all..</label><br>
+         
+         <button type="button" class="btn btn-primary">
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

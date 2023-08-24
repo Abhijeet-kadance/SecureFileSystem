@@ -38,9 +38,15 @@
                   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{% url 'register_view' %}"> <i class="fa fa-user-plus px-1" aria-hidden="true"></i>Register</a>
                   </li>
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" style="color:white" href="{% url 'logout' %}"><i class="fa fa-sign-in px-1" aria-hidden="true"></i>Logout</a>
+                  </li>
+                  {% else %}
                   <li class="nav-item">
                     <a class="nav-link" style="color:white" href="{% url 'login' %}"><i class="fa fa-sign-in px-1" aria-hidden="true"></i>Login</a>
                   </li>
+                  {% endif %}
                  
                 </ul>
                 <form class="d-flex" role="search">
