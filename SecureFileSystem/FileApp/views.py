@@ -214,7 +214,26 @@ def forgot_password_view(request):
     return render(request, 'FileApp/ForgetPassword.html',{'form':form})
 
 def download_view(request):
+    
     download_obj = Material.objects.all()
+    # print("Email :",request.user.email)
+    # user = request.user.email
+    # print(request.POST().get('download'))
+    if request.method == 'POST':
+        if request.POST.get('download') == None:
+            messages.error(request, "Please Accept Terms and Conditions !!", extra_tags='danger')           
+            print("Please Accept Terms and Conditions")
+        else:
+            messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
+            # print(request.POST.get('download'))
+            Material_id = request.POST.get('download')
+            Material_obj = Material.objects.get(pk=Material_id)
+            print("Material Object :",Material_obj)
+            b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
+            b.save()
+            
+
+        
 
     context = {
         "download_obj": download_obj
@@ -257,4 +276,8 @@ def admin_material_approval(request):
     }
     
     return render(request, 'FileApp/admin_material_approval.html', context)
+
+
+# def download_request(request):
+#     return render(request, 'FileApp/Download.html')
     
