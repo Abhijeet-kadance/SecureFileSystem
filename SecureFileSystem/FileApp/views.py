@@ -216,7 +216,13 @@ def forgot_password_view(request):
 def download_view(request):
     
     download_obj = Material.objects.all()
-    print(request.POST())
+    # print(request.POST().get('download'))
+    if request.method == 'POST':
+        print(request.POST.get('download'))
+        # for item in download_obj.all():
+        #     print(item.Material_Title)
+        
+
     context = {
         "download_obj": download_obj
     }

@@ -1,11 +1,11 @@
 {% extends 'FileApp/index.html' %} {% load static %} {% block download %}
-<script>
+<!-- <script>
   $(document).ready(function () {
     $("#MybtnModal").click(function () {
       $("#Mymodal").modal("show");
     });
   });
-</script>
+</script> -->
 <h1 class="text-center header_design py-2">Download Corner</h1>
 
 <div class="page-content" id="main-content">
@@ -147,12 +147,155 @@
               {{ data.Materail_Created_Date }}
             </div>
             <div class="download">
-              <button class="btn btn-primary" id="MybtnModal">Download</button>
+              <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Mymodal{{forloop.counter}}" >Download</a>
               <button class="btn btn-primary">Write a Review</button>
             </div>
           </div>
         </div>
+
+
+        <div class="modal fade" id="Mymodal{{ forloop.counter }}">
+         <div class="modal-dialog modal-lg">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-bs-dismiss="modal">×</button>
+               <h4 class="modal-title">Terms and Conditions</h4>
+             </div>
+             <div class="modal-body">
+               This notice and terms and conditions mentioned here pertains to Ministry
+               of Electronics and Information Technology, Govt. of India, Data Centre
+               Website "www.tdil-dc.in" here after referred to as "this Website". All
+               content of this Website is owned or controlled by MeitY and is protected
+               by worldwide copyright laws. “This Website” contains information,
+               artwork, text, video, audio, software tools and technologies,
+               documentation, etc used only for information and also for use by a valid
+               download license holder only. You must not modify or use the Materials
+               for any other purpose without MeitY's express written consent. By using
+               and/or downloading any Materials from MeitY's Web site, you will be
+               deemed to agree to these terms: Ownership of Materials Software and
+               Documentation Information Enforcement of Intellectual Property Rights
+               Feedback and Information Warranties and Disclaimers Arbitrations Updates
+               Ownership of Materials The Materials contained in this site is
+               copyrighted and must not be distributed, modified, reproduced in whole
+               or in part without the written consent of MeitY prior to usage. Software
+               and Documentation Information 1. Documentation MeitY provides
+               documentation to explain how to use the resources available on this
+               website. Any person is hereby authorized to: a) store this documentation
+               on a single computer for personal use only and b) print copies of
+               documentation for personal use only, provided that the documentation
+               contains MeitY's copyright notice. You may want to download a copy of
+               the Materials for your personal, non-commercial internal use only by
+               getting the permission from MeitY. This is a personal license, and under
+               no circumstances shall this license be construed as a transfer of title
+               to any Materials found at this Site. The license granted by MeitY herein
+               is subject to the following restrictions: You must not: (a) modify the
+               Materials or use them for any commercial purpose, or any public display,
+               performance, sale or rental except and only to the extent permitted by
+               applicable law or specific license;(b) Decompile, reverse engineer, or
+               disassemble software Materials except and only to the extent permitted
+               by applicable law or specific license; (c) remove any copyright or other
+               proprietary notices from the Materials; (d) transfer the Materials to
+               another person; (e) use any such Materials on any other Website or
+               networked computer environment. You agree to prevent any unauthorized
+               copying of the Materials. MeitY will terminate this license at any time
+               if you are in breach of the terms of this Agreement. Upon termination,
+               you will immediately destroy the Materials. 2. Third Party Companies and
+               Products Mention of some third-party products, companies and Web sites
+               on the MeitY's Web site is only for informational purposes and
+               constitutes neither an endorsement nor a recommendation, unless
+               otherwise indicated. MeitY assumes no responsibility with regard to the
+               selection, performance or use of these products or vendors. MeitY
+               provides this only as a convenience to our users. This is to inform you
+               that the above mentioned third party products, companies and Web sites
+               are independent of MeitY and MeitY has no control over the contents,
+               selection, performance or use of such third party Web sites. A link to a
+               other Websites does not mean that MeitY endorses or accepts any
+               responsibility for the content or use of such Website. Enforcement of
+               Intellectual Property Rights MeitY actively and aggressively enforces
+               its intellectual property rights to the fullest extent of the law.
+               Feedback and Information Any information and/or feedback you provide at
+               this site shall be deemed to be non-confidential. MeitY shall be free to
+               use such information on an unrestricted basis. MeitY will be free to
+               copy, disclose, distribute, incorporate and otherwise use the
+               submissions and all data, images, sound, text or other content embodied
+               therein for any purposes it deems fit, commercial or non-commercial,
+               without liability or compensation to any person or entity. (Also refer
+               to MeitY Privacy Policy.) The sender of any communications to the MeitY
+               Web site or otherwise to the owners of this site shall be responsible
+               for the content and information contained therein, including its
+               truthfulness and accuracy. Warranties and Disclaimers MeitY intends that
+               the information and data contained in the MeitY Data Centre Website to
+               be accurate and reliable, however, since the information and data have
+               been compiled by MeitY from a variety of sources, it is provided on "AS
+               IS" basis. 1) MeitY EXPRESSLY DISCLAIMS, ALL WARRANTIES AND/OR
+               CONDITIONS, EXPRESSED OR IMPLIED, AS TO ANY MATTER WHATSOEVER RELATING
+               TO OR REFERENCED BY THE MeitY WEB SITE, INCLUDING, BUT NOT LIMITED TO,
+               THE IMPLIED WARRANTIES AND/OR CONDITIONS OF MERCHANTABILITY OR
+               SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE AND NON
+               INFRINGEMENT. 2) IN NO EVENT SHALL MeitY OR ITS' LICENSORS/SUPPLIERS BE
+               LIABLE FOR ANY DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION,
+               DAMAGES FOR LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF INFORMATION)
+               ARISING OUT OF THE USE OF OR INABILITY TO USE THE MATERIALS, EVEN IF
+               MeitY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. 3) MeitY ALSO
+               DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE MATERIALS WILL BE
+               UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT
+               THIS SITE OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR
+               OTHER HARMFUL COMPONENTS. 4) YOU UNDERSTAND AND AGREE THAT ANY MATERIALS
+               DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE SITE IS AT YOUR
+               OWN DISCRETION AND RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY
+               DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE
+               DOWNLOAD OF MATERIALS. 5) MeitY DOES NOT GIVE ANY WARRANTY REGARDING ANY
+               GOODS OR SERVICES OBTAINED THROUGH THE SITE OR ANY TRANSACTIONS ENTERED
+               INTO THROUGH THE SITE. 6) UNDER NO CIRCUMSTANCES SHALL MeitY BE LIABLE
+               FOR ANY DIRECT, INDIRECT, INCIDENTAL, PUNITIVE, SPECIAL OR CONSEQUENTIAL
+               DAMAGES, RESULTING FROM: (A) THE USE OR THE INABILITY TO USE THE SITE;
+               (B) MESSAGES RECEIVED OR TRANSACTIONS ENTERED INTO THROUGH THE SITE; (C)
+               THE MATERIALS IN THE SITE; (D) ANY OTHER MATTER RELATED TO THE SITE,
+               EVEN IF MeitY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+               BECAUSE SOME JURISDICTIONS PROHIBIT THE EXCLUSION OR LIMITATION OF
+               LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION
+               MAY NOT APPLY TO YOU. MeitY may provide access to MeitYs' international
+               data and, therefore, may contain references or cross references to MeitY
+               products, programs and services that are not announced in your country.
+               Such reference does not imply that MeitY in your country intends to
+               announce such products, programs or services. Arbitrations This Website
+               is controlled by MeitY from its offices in New Delhi in the State of
+               Delhi within the Union of India. Those who choose to access this Website
+               from other locations do so on their own initiative and are responsible
+               for compliance with applicable local laws, if and to the extent that
+               local laws are applicable. Any claim relating to the Materials shall be
+               governed by the laws of the Union of India. Any dispute or difference
+               arising for the use of this site or in the interpretation of this
+               agreement/notice shall be referred to the webmaster at MeitY. The
+               decision of the webmaster shall be final and binding. In the event of a
+               dispute, the jurisdiction for the settling shall be in the courts in
+               Delhi, India only. Updates MeitY reserves the right to revise, change or
+               modify these Terms at any time by updating this posting or by inserting
+               legal notices located on particular pages at this Site. Please remember
+               to visit this page from time to time to review any amendments to the
+               above Terms and their effect on your use of this Site and the Materials
+               contained therein. The information contained in this Website is subject
+               to change without notice.
+             </div>
+             <div class="modal-footer">
+                <form method="POST">
+                   {% csrf_token %}
+                   <input type="checkbox" id="download" name="download" value={{data.id}}  >
+                   <label for="vehicle1"> I have read the terms and condition and Accept them all..</label>
+                   <span>
+                      <button type="submit" class="btn btn-primary">
+                         Submit Request
+                      </button>
+                   </span>
+                </form>
+             </div>
+           </div>
+         </div>
+       </div>
         {% endif %}
+
+       
+
         {% endfor %}
       </div>
       
@@ -166,143 +309,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="Mymodal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal">×</button>
-        <h4 class="modal-title">Terms and Conditions</h4>
-      </div>
-      <div class="modal-body">
-        This notice and terms and conditions mentioned here pertains to Ministry
-        of Electronics and Information Technology, Govt. of India, Data Centre
-        Website "www.tdil-dc.in" here after referred to as "this Website". All
-        content of this Website is owned or controlled by MeitY and is protected
-        by worldwide copyright laws. “This Website” contains information,
-        artwork, text, video, audio, software tools and technologies,
-        documentation, etc used only for information and also for use by a valid
-        download license holder only. You must not modify or use the Materials
-        for any other purpose without MeitY's express written consent. By using
-        and/or downloading any Materials from MeitY's Web site, you will be
-        deemed to agree to these terms: Ownership of Materials Software and
-        Documentation Information Enforcement of Intellectual Property Rights
-        Feedback and Information Warranties and Disclaimers Arbitrations Updates
-        Ownership of Materials The Materials contained in this site is
-        copyrighted and must not be distributed, modified, reproduced in whole
-        or in part without the written consent of MeitY prior to usage. Software
-        and Documentation Information 1. Documentation MeitY provides
-        documentation to explain how to use the resources available on this
-        website. Any person is hereby authorized to: a) store this documentation
-        on a single computer for personal use only and b) print copies of
-        documentation for personal use only, provided that the documentation
-        contains MeitY's copyright notice. You may want to download a copy of
-        the Materials for your personal, non-commercial internal use only by
-        getting the permission from MeitY. This is a personal license, and under
-        no circumstances shall this license be construed as a transfer of title
-        to any Materials found at this Site. The license granted by MeitY herein
-        is subject to the following restrictions: You must not: (a) modify the
-        Materials or use them for any commercial purpose, or any public display,
-        performance, sale or rental except and only to the extent permitted by
-        applicable law or specific license;(b) Decompile, reverse engineer, or
-        disassemble software Materials except and only to the extent permitted
-        by applicable law or specific license; (c) remove any copyright or other
-        proprietary notices from the Materials; (d) transfer the Materials to
-        another person; (e) use any such Materials on any other Website or
-        networked computer environment. You agree to prevent any unauthorized
-        copying of the Materials. MeitY will terminate this license at any time
-        if you are in breach of the terms of this Agreement. Upon termination,
-        you will immediately destroy the Materials. 2. Third Party Companies and
-        Products Mention of some third-party products, companies and Web sites
-        on the MeitY's Web site is only for informational purposes and
-        constitutes neither an endorsement nor a recommendation, unless
-        otherwise indicated. MeitY assumes no responsibility with regard to the
-        selection, performance or use of these products or vendors. MeitY
-        provides this only as a convenience to our users. This is to inform you
-        that the above mentioned third party products, companies and Web sites
-        are independent of MeitY and MeitY has no control over the contents,
-        selection, performance or use of such third party Web sites. A link to a
-        other Websites does not mean that MeitY endorses or accepts any
-        responsibility for the content or use of such Website. Enforcement of
-        Intellectual Property Rights MeitY actively and aggressively enforces
-        its intellectual property rights to the fullest extent of the law.
-        Feedback and Information Any information and/or feedback you provide at
-        this site shall be deemed to be non-confidential. MeitY shall be free to
-        use such information on an unrestricted basis. MeitY will be free to
-        copy, disclose, distribute, incorporate and otherwise use the
-        submissions and all data, images, sound, text or other content embodied
-        therein for any purposes it deems fit, commercial or non-commercial,
-        without liability or compensation to any person or entity. (Also refer
-        to MeitY Privacy Policy.) The sender of any communications to the MeitY
-        Web site or otherwise to the owners of this site shall be responsible
-        for the content and information contained therein, including its
-        truthfulness and accuracy. Warranties and Disclaimers MeitY intends that
-        the information and data contained in the MeitY Data Centre Website to
-        be accurate and reliable, however, since the information and data have
-        been compiled by MeitY from a variety of sources, it is provided on "AS
-        IS" basis. 1) MeitY EXPRESSLY DISCLAIMS, ALL WARRANTIES AND/OR
-        CONDITIONS, EXPRESSED OR IMPLIED, AS TO ANY MATTER WHATSOEVER RELATING
-        TO OR REFERENCED BY THE MeitY WEB SITE, INCLUDING, BUT NOT LIMITED TO,
-        THE IMPLIED WARRANTIES AND/OR CONDITIONS OF MERCHANTABILITY OR
-        SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE AND NON
-        INFRINGEMENT. 2) IN NO EVENT SHALL MeitY OR ITS' LICENSORS/SUPPLIERS BE
-        LIABLE FOR ANY DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION,
-        DAMAGES FOR LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF INFORMATION)
-        ARISING OUT OF THE USE OF OR INABILITY TO USE THE MATERIALS, EVEN IF
-        MeitY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. 3) MeitY ALSO
-        DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE MATERIALS WILL BE
-        UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT
-        THIS SITE OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR
-        OTHER HARMFUL COMPONENTS. 4) YOU UNDERSTAND AND AGREE THAT ANY MATERIALS
-        DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE SITE IS AT YOUR
-        OWN DISCRETION AND RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY
-        DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE
-        DOWNLOAD OF MATERIALS. 5) MeitY DOES NOT GIVE ANY WARRANTY REGARDING ANY
-        GOODS OR SERVICES OBTAINED THROUGH THE SITE OR ANY TRANSACTIONS ENTERED
-        INTO THROUGH THE SITE. 6) UNDER NO CIRCUMSTANCES SHALL MeitY BE LIABLE
-        FOR ANY DIRECT, INDIRECT, INCIDENTAL, PUNITIVE, SPECIAL OR CONSEQUENTIAL
-        DAMAGES, RESULTING FROM: (A) THE USE OR THE INABILITY TO USE THE SITE;
-        (B) MESSAGES RECEIVED OR TRANSACTIONS ENTERED INTO THROUGH THE SITE; (C)
-        THE MATERIALS IN THE SITE; (D) ANY OTHER MATTER RELATED TO THE SITE,
-        EVEN IF MeitY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-        BECAUSE SOME JURISDICTIONS PROHIBIT THE EXCLUSION OR LIMITATION OF
-        LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION
-        MAY NOT APPLY TO YOU. MeitY may provide access to MeitYs' international
-        data and, therefore, may contain references or cross references to MeitY
-        products, programs and services that are not announced in your country.
-        Such reference does not imply that MeitY in your country intends to
-        announce such products, programs or services. Arbitrations This Website
-        is controlled by MeitY from its offices in New Delhi in the State of
-        Delhi within the Union of India. Those who choose to access this Website
-        from other locations do so on their own initiative and are responsible
-        for compliance with applicable local laws, if and to the extent that
-        local laws are applicable. Any claim relating to the Materials shall be
-        governed by the laws of the Union of India. Any dispute or difference
-        arising for the use of this site or in the interpretation of this
-        agreement/notice shall be referred to the webmaster at MeitY. The
-        decision of the webmaster shall be final and binding. In the event of a
-        dispute, the jurisdiction for the settling shall be in the courts in
-        Delhi, India only. Updates MeitY reserves the right to revise, change or
-        modify these Terms at any time by updating this posting or by inserting
-        legal notices located on particular pages at this Site. Please remember
-        to visit this page from time to time to review any amendments to the
-        above Terms and their effect on your use of this Site and the Materials
-        contained therein. The information contained in this Website is subject
-        to change without notice.
-      </div>
-      <div class="modal-footer">
-         <form  method="POST">
-            {% csrf_token %}
-            <input type="checkbox" id="download" name="download" value="download">
-            <label for="vehicle1"> I have read the terms and condition and Accept them all..</label>
-            <span>
-               <button type="button" class="btn btn-primary">
-                  Submit Request
-               </button>
-            </span>
-         </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 {% endblock %}
