@@ -225,7 +225,7 @@ def download_view(request):
         print("User is authenticated")
         if request.method == 'POST':
             
-
+            print("Selected categories : " , request.POST.getlist('select_category'))
             if request.POST.get('download'):
                 print("Download Form")
                 Materials_id = request.POST.get('download')
@@ -240,16 +240,15 @@ def download_view(request):
             
             # Filter By Category Logic 
             elif request.POST.get('select_category'):
-                selected_category = request.POST.get('select_category')
-                # print("filter Form : ", selected_category )
-                for data in download_obj:
-                    print(data.Material_CategoryType)
-                material_filter_object = Material.objects.filter(Material_CategoryType=selected_category)
+                selected_category = request.POST.getlist('select_category')
+                
+                material_filter_object = Material.objects.filter(Material_CategoryType__in=selected_category)
                 
                 context = {
                     "download_obj": material_filter_object,
                     "download_approval_obj":download_approval_obj,
                     "download_catergory_obj":download_catergory_obj,
+                    "selected_category":selected_category,
                 }
                 return render(request, 'FileApp/Download.html',context)
             elif request.POST.get('reset') == 'reset':

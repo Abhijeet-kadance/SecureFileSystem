@@ -69,7 +69,6 @@
                     <label class="custom_check">
                       <input
                         type="checkbox"
-                        id="select_category"
                         name="select_category"
                         value="{{ category.id }}"
                       />
@@ -307,6 +306,9 @@
            </div>
          </div>
        </div>
+
+
+       
         {% endif %}
 
        
@@ -324,6 +326,13 @@
   </div>
 </div>
 
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
 
+    selected_categories = `{{ selected_category | safe }}` 
+    console.log("in side load ", selected_categories)
+
+  }, false);
+ </script>
 
 {% endblock %}

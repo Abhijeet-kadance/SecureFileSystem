@@ -1,0 +1,38 @@
+## Sending Data from Multiple check box to backend server
+
+    >> In Html 
+
+         <input
+                type="checkbox"
+                name="select_category"
+                value="{{ category.id }}"   />
+
+                -> This is a simple select check box. In front End you can have multiple Approches like
+                    * Using a Seprate custom Django Form to populate the Multiple select Checkboxes
+                    * Using Django Template For Loop to iterate the values from object to Front End
+                    * Django HtML AJAX Call with only requuired reload (Havent't Tried yet!!)
+
+    - > Once you Implemented a approch you can see multiple checkboxex populated with the options
+        Input box have a 'name' attribute. You can mention any name you want. In the above example you can see we have used 'select_category'.
+
+    - > This name value is used to fetch the selected data in the backend server (Logic)
+    - > in our case we have a view named Filter_view:
+        def filter_view(request):
+            if request.method == 'POST':
+                selected_category = request.POST.get('select_category') // Option 1 when we are working with a single checkbox condition
+                selected_category = request.POST.getlist('select_category') // Option 2 for getting multiple checkbox data in the form of list 
+
+                the .getlist() method is usefull to fetch multiple select data in request object.
+
+    - > You have a list noe in case of getlist(), you can further use a filter to filter out the data you need and response back.
+
+    - > But what happens when we use this : 
+    filter_object = Model_Name.objects.filter(Model_CategoryType=selected_category)
+
+    Here it would oly consider the last value in the list.
+
+    - > in Order to filter out all the values in the List :
+
+        We use the '__in' property to check in the queryset like this :
+
+            filter_object = Model_name.objects.filter(Model_CategoryType__in=selected_category)
