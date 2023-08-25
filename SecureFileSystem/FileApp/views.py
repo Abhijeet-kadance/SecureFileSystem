@@ -224,6 +224,7 @@ def download_view(request):
     if request.user.is_authenticated:
         print("User is authenticated")
         if request.method == 'POST':
+            
 
             if request.POST.get('download'):
                 print("Download Form")
@@ -240,13 +241,26 @@ def download_view(request):
             # Filter By Category Logic 
             elif request.POST.get('select_category'):
                 selected_category = request.POST.get('select_category')
-                print("filter Form")
+                # print("filter Form : ", selected_category )
                 for data in download_obj:
                     print(data.Material_CategoryType)
-                material_filter_object = Material.objects.filter(Material_CategoryType='3')
-                print(request.POST.get('select_category'))
-                print(material_filter_object)
-
+                material_filter_object = Material.objects.filter(Material_CategoryType=selected_category)
+                
+                context = {
+                    "download_obj": material_filter_object,
+                    "download_approval_obj":download_approval_obj,
+                    "download_catergory_obj":download_catergory_obj,
+                }
+                return render(request, 'FileApp/Download.html',context)
+            elif request.POST.get('reset') == 'reset':
+                reset_obj = Material.objects.all()
+                context = {
+                    "download_obj": reset_obj,
+                    "download_approval_obj":download_approval_obj,
+                    "download_catergory_obj":download_catergory_obj,
+                }
+                return render(request, 'FileApp/Download.html',context)
+            
             else:
                 print("Please tick the checkbox first")
                 messages.error(request, "Please tick the checkbox first", extra_tags='danger')           
