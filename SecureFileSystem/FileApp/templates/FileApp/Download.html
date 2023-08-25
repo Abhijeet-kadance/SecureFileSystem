@@ -185,35 +185,25 @@
               <i class="fa fa-calendar" aria-hidden="true"></i> Added On
               {{ data.Materail_Created_Date }}
             </div>
-            
+            <!--             
             <div>
                {% for data_new in download_approval_obj %}
-               <!-- <p>{{ data_new.Requested_User }}</p>
-               <p>Logged in User : {{ user }}</p> -->
                   {% if data_new.Requested_User == user and data_new.Material_id == data.id %}
                   <p>Already Request Sent</p>
                   {% else %}
                   <p>Download</p>
                   {% endif %}
                {% endfor %}
-            </div>
-            <!-- {% for approval_data in download_approval_obj %}
-               {% if approval_data.Requested_User == user.get_email %}
-                  <p>{{ approval_data.Requested_User }}</p>
-                  HIi
-               {% endif %}
-            {% endfor %}
-  -->
-            <!-- <div class="download">
+            </div> -->
+         
+
+            <div class="download">
               <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Mymodal{{forloop.counter}}" >Download</a>
               <button class="btn btn-primary">Write a Review</button>
-            </div> -->
+            </div> 
            
 
-            <!-- <div class="download">
-               <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Mymodal{{forloop.counter}}">Download</a>
-               <button class="btn btn-primary">Write a Review</button>
-             </div> -->
+           
 
           </div>
         </div>
