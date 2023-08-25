@@ -20,3 +20,12 @@ class MaterialApprovalDocument(admin.ModelAdmin):
     ordering = ('id',)
     list_per_page: int = 20
     save_on_top = True
+
+@admin.register(MaterialCategory)
+class MaterialCategoryModel(admin.ModelAdmin):
+    list_display = ('id', 'MaterialCategory_Name', "MaterialCategory_Status", 'MaterialCategory_CreationDate', 'MaterialCategory_PublishedStatus', 'MaterialCategory_Author')
+    list_display_links = ('id', 'MaterialCategory_Name', 'MaterialCategory_Author', )
+    search_fields = ('Material__Material_Title',)
+    ordering = ('id',)
+    list_per_page: int = 20
+    save_on_top = True

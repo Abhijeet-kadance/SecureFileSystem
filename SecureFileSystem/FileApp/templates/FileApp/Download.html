@@ -62,64 +62,35 @@
                   <i class="fas fa-angle-down"></i>
                 </div>
 
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'download' %}" method="POST" enctype="multipart/form-data">
                   {% csrf_token %}
-
+                  {% for category in download_catergory_obj %}
                   <div>
                     <label class="custom_check">
                       <input
                         type="checkbox"
-                        name="select_specialist"
-                        value="{{ category.DocumentCategory_Name }}"
+                        id="select_category"
+                        name="select_category"
+                        value="{{ category.MaterialCategory_Name }}"
                       />
-                      <span class="checkmark">Text to Speech</span>
+                      <span class="checkmark">{{ category.MaterialCategory_Name}}</span>
                     </label>
                   </div>
-
-                  <div>
-                    <label class="custom_check">
-                      <input
-                        type="checkbox"
-                        name="select_specialist"
-                        value="{{ category.DocumentCategory_Name }}"
-                        checked
-                      />
-                      <span class="checkmark">Translation</span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <label class="custom_check">
-                      <input
-                        type="checkbox"
-                        name="select_specialist"
-                        value="{{ category.DocumentCategory_Name }}"
-                      />
-                      <span class="checkmark">Transliteration</span>
-                    </label>
-                  </div>
-
-                  <div class="d-flex justify-content-center mt-2">
-                    <button
-                      class="btn btn-primary mb-3 me-3"
-                      type="submit"
-                      value="Fetch"
-                    >
+                  {% endfor %}
+                  
+                  <!-- <div class="d-flex justify-content-center mt-2"> -->
+                 
+                    <button class="btn btn-primary mt-3 me-3" id="filter" name="filter" type="submit" >
                       Filter
                     </button>
-                  </div>
+                    <!-- <form  method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <button class="btn btn-primary mt-3" type="submit" value="Fetch">
+                        Reset
+                      </button>
+                    </form> -->
                 </form>
-                <form action="#" method="POST" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <!-- <button class="btn btn-primary mb-3" type="submit" value="Fetch"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button> -->
-                  <button
-                    class="btn btn-primary mb-3"
-                    type="submit"
-                    value="Fetch"
-                  >
-                    Reset
-                  </button>
-                </form>
+               
               </div>
             </div>
           </div>
@@ -185,17 +156,6 @@
               <i class="fa fa-calendar" aria-hidden="true"></i> Added On
               {{ data.Materail_Created_Date }}
             </div>
-            <!--             
-            <div>
-               {% for data_new in download_approval_obj %}
-                  {% if data_new.Requested_User == user and data_new.Material_id == data.id %}
-                  <p>Already Request Sent</p>
-                  {% else %}
-                  <p>Download</p>
-                  {% endif %}
-               {% endfor %}
-            </div> -->
-         
 
             <div class="download">
               <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Mymodal{{forloop.counter}}" >Download</a>

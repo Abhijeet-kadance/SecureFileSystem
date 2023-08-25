@@ -218,35 +218,52 @@ def forgot_password_view(request):
 def download_view(request):
     download_obj = Material.objects.all()
     download_approval_obj = MaterialApproval.objects.all()
+    download_catergory_obj = MaterialCategory.objects.all()
+
 
     if request.user.is_authenticated:
         print("User is authenticated")
         if request.method == 'POST':
-            if request.POST.get('download') == None:
-                messages.error(request, "Please Accept Terms and Conditions !!", extra_tags='danger')           
-                print("Please Accept Terms and Conditions")
-            else:
+
+            if request.POST.get('download'):
+                print("Download Form")
                 Materials_id = request.POST.get('download')
                 Material_obj = Material.objects.get(pk=Materials_id)
                 if MaterialApproval.objects.filter(Q(Requested_User_id=request.user.id) & Q(Material_id=int(Materials_id))).exists():
                     print("Document Already Requeted")
-                    messages.error(request, "Document Already Requeted", extra_tags='danger')           
+                    messages.error(request, "Document Already Requested !!", extra_tags='danger')           
                 else:
                     b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
                     b.save()
                     messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
-        else:
-            print("Something went wrong !!!")
-            messages.error(request,"Something went wrong !! Please Login Again", extra_tags='danger')
-            # return render('login')
+            
+            # Filter By Category Logic 
+            elif request.POST.get('select_category'):
+                selected_category = request.POST.get('select_category')
+                print("filter Form")
+                for data in download_obj:
+                    print(data.Material_CategoryType)
+                material_filter_object = Material.objects.filter(Material_CategoryType='3')
+                print(request.POST.get('select_category'))
+                print(material_filter_object)
+
+            else:
+                print("Please tick the checkbox first")
+                messages.error(request, "Please tick the checkbox first", extra_tags='danger')           
+
     else:
         print("Please Login First")
         messages.error(request,"Please Login First to download", extra_tags='danger')
     context = {
         "download_obj": download_obj,
-        "download_approval_obj":download_approval_obj
+        "download_approval_obj":download_approval_obj,
+        "download_catergory_obj":download_catergory_obj,
     }
     return render(request, 'FileApp/Download.html',context)
+
+# def download_filter_view(request):
+#     print("Inside DownloadFilterView...")
+#     return render(request,'FileApp/Download.html')
 
 
 def admin_material_approval(request):
