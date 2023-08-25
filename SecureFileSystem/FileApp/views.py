@@ -214,26 +214,34 @@ def forgot_password_view(request):
     form = ForgotPasswordForm()
     return render(request, 'FileApp/ForgetPassword.html',{'form':form})
 
+
 def download_view(request):
-    
     download_obj = Material.objects.all()
     download_approval_obj = MaterialApproval.objects.all()
-    # print("Email :",request.user.email)
-    # user = request.user.email
-    # print(request.POST().get('download'))
-    if request.method == 'POST':
-        if request.POST.get('download') == None:
-            messages.error(request, "Please Accept Terms and Conditions !!", extra_tags='danger')           
-            print("Please Accept Terms and Conditions")
-        else:
-            messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
-            # print(request.POST.get('download'))
-            Material_id = request.POST.get('download')
-            Material_obj = Material.objects.get(pk=Material_id)
-            print("Material Object :",Material_obj)
-            b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
-            b.save()
 
+    if request.user.is_authenticated:
+        print("User is authenticated")
+        if request.method == 'POST':
+            if request.POST.get('download') == None:
+                messages.error(request, "Please Accept Terms and Conditions !!", extra_tags='danger')           
+                print("Please Accept Terms and Conditions")
+            else:
+                Materials_id = request.POST.get('download')
+                Material_obj = Material.objects.get(pk=Materials_id)
+                if MaterialApproval.objects.filter(Q(Requested_User_id=request.user.id) & Q(Material_id=int(Materials_id))).exists():
+                    print("Document Already Requeted")
+                    messages.error(request, "Document Already Requeted", extra_tags='danger')           
+                else:
+                    b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
+                    b.save()
+                    messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
+        else:
+            print("Something went wrong !!!")
+            messages.error(request,"Something went wrong !! Please Login Again", extra_tags='danger')
+            # return render('login')
+    else:
+        print("Please Login First")
+        messages.error(request,"Please Login First to download", extra_tags='danger')
     context = {
         "download_obj": download_obj,
         "download_approval_obj":download_approval_obj
