@@ -243,12 +243,12 @@ def download_view(request):
                 selected_category = request.POST.getlist('select_category')
                 
                 material_filter_object = Material.objects.filter(Material_CategoryType__in=selected_category)
-                
+                updated_list = [eval(i) for i in selected_category]
                 context = {
                     "download_obj": material_filter_object,
                     "download_approval_obj":download_approval_obj,
                     "download_catergory_obj":download_catergory_obj,
-                    "selected_category":selected_category,
+                    "selected_category":updated_list,
                 }
                 return render(request, 'FileApp/Download.html',context)
             elif request.POST.get('reset') == 'reset':

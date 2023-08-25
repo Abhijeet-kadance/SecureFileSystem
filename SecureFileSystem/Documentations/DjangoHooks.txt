@@ -36,3 +36,9 @@
         We use the '__in' property to check in the queryset like this :
 
             filter_object = Model_name.objects.filter(Model_CategoryType__in=selected_category)
+
+
+
+## Converting a string list to integer list :
+
+    [eval(i) for i in selected_category] 
