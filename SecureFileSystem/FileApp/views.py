@@ -225,12 +225,13 @@ def download_view(request):
 
 
     if request.user.is_authenticated:
+        
         paginator1 = Paginator(download_obj,2)
         page_number = request.GET.get('page')
         Page_data = paginator1.get_page(page_number)
         totalpages = Page_data.paginator.num_pages
 
-        print("User is authenticated")
+        print("User is authenticated ")
         if request.method == 'POST':
             
             print("Selected categories : " , request.POST.getlist('select_category'))
@@ -249,6 +250,8 @@ def download_view(request):
             # Filter By Category Logic 
             elif request.POST.get('select_category'):
                 selected_category = request.POST.getlist('select_category')
+                
+                request.session['selected_categories'] = selected_category
                 # paginator = Paginator()
                 material_filter_object = Material.objects.filter(Material_CategoryType__in=selected_category)
                 paginator = Paginator(material_filter_object,2)
@@ -261,7 +264,7 @@ def download_view(request):
                     "download_approval_obj":download_approval_obj,
                     "download_catergory_obj":download_catergory_obj,
                     "selected_category":selected_category,
-                     "totalPageList":[n+1 for n in range(totalpages)]
+                    "totalPageList":[n+1 for n in range(totalpages)]
                 }
                 return render(request, 'FileApp/Download.html',context)
             elif request.POST.get('reset') == 'reset':
@@ -284,7 +287,8 @@ def download_view(request):
         "download_obj": Page_data,
         "download_approval_obj":download_approval_obj,
         "download_catergory_obj":download_catergory_obj,
-        "totalPageList":[n+1 for n in range(totalpages)]
+        "totalPageList":[n+1 for n in range(totalpages)],
+        # "selected_category":selected_category,
     }
     return render(request, 'FileApp/Download.html',context)
 

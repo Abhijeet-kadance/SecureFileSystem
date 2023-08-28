@@ -46,6 +46,10 @@
     </div>
 </div>
 
+<p>
+  Session data : {{ request.session.selected_categories }}
+</p>
+
 
 <div class="page-content" id="main-content">
   <!-- Main Container -->
@@ -326,9 +330,9 @@
             {% endif %}
             
             {% for n in totalPageList %}
-              <form action="{% url 'download' %}" method="POST">
+              
                 <li class="page-item"><a class="page-link" type="submit" href="/download?page={{n}}">{{ n  }}</a></li>
-              </form>
+ 
            
             {% endfor %}
             
@@ -364,13 +368,16 @@
 <script>
   window.addEventListener("DOMContentLoaded", function() {
     selected_categories = {{ selected_category | safe }}
+    var someSession = '<%= Session["selected_categories"].ToString() %>';
+    console.log("Seddion datd a: ",someSession);
 
     console.log("in site load ", selected_categories)
     
     const checkboxes = document.querySelectorAll('input[name="select_category"]')
     console.log(checkboxes)
 
-    
+    // session_values = {{ session.selected_categories }}
+    // console.log("session values : ", session_values)
     selected_categories.forEach((element) => {
     //  console.log(document.getElementById(element))
       // if (!document.getElementById(element).checked)
