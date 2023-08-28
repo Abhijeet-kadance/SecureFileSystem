@@ -16,7 +16,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db.models import Q
-
+from django.core.paginator import Paginator
+ 
 # Create your views here.
 def index(request):
     return render(request, 'FileApp/index.html')
@@ -218,10 +219,17 @@ def forgot_password_view(request):
 def download_view(request):
     download_obj = Material.objects.all()
     download_approval_obj = MaterialApproval.objects.all()
-    download_catergory_obj = MaterialCategory.objects.all()
+    download_catergory_obj = MaterialCategory.objects.all().order_by('id')
+
+    print(download_catergory_obj)
 
 
     if request.user.is_authenticated:
+        paginator1 = Paginator(download_obj,2)
+        page_number = request.GET.get('page')
+        Page_data = paginator1.get_page(page_number)
+        totalpages = Page_data.paginator.num_pages
+
         print("User is authenticated")
         if request.method == 'POST':
             
@@ -241,14 +249,19 @@ def download_view(request):
             # Filter By Category Logic 
             elif request.POST.get('select_category'):
                 selected_category = request.POST.getlist('select_category')
-                
+                # paginator = Paginator()
                 material_filter_object = Material.objects.filter(Material_CategoryType__in=selected_category)
+                paginator = Paginator(material_filter_object,2)
+                page_number = request.GET.get('page')
+                Page_data = paginator.get_page(page_number)
+                totalpages = Page_data.paginator.num_pages
                 updated_list = [eval(i) for i in selected_category]
                 context = {
-                    "download_obj": material_filter_object,
+                    "download_obj": Page_data,
                     "download_approval_obj":download_approval_obj,
                     "download_catergory_obj":download_catergory_obj,
-                    "selected_category":updated_list,
+                    "selected_category":selected_category,
+                     "totalPageList":[n+1 for n in range(totalpages)]
                 }
                 return render(request, 'FileApp/Download.html',context)
             elif request.POST.get('reset') == 'reset':
@@ -268,9 +281,10 @@ def download_view(request):
         print("Please Login First")
         messages.error(request,"Please Login First to download", extra_tags='danger')
     context = {
-        "download_obj": download_obj,
+        "download_obj": Page_data,
         "download_approval_obj":download_approval_obj,
         "download_catergory_obj":download_catergory_obj,
+        "totalPageList":[n+1 for n in range(totalpages)]
     }
     return render(request, 'FileApp/Download.html',context)
 

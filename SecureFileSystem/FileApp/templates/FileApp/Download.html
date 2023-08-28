@@ -315,7 +315,41 @@
        
 
         {% endfor %}
+        <nav aria-label="...">
+          <ul class="pagination">
+            {% if download_obj.has_previous %}
+            <li class="page-item disabled">
+              <span >
+                <a class="page-link" href="/download?page={{ download_obj.previous_page_number }}"> Previous </a> 
+              </span>
+            </li>
+            {% endif %}
+            
+            {% for n in totalPageList %}
+              <form action="{% url 'download' %}" method="POST">
+                <li class="page-item"><a class="page-link" type="submit" href="/download?page={{n}}">{{ n  }}</a></li>
+              </form>
+           
+            {% endfor %}
+            
+            <!-- <li class="page-item active">
+              <span class="page-link">
+                2
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+            {% if download_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="/download?page={{ download_obj.next_page_number }}">Next</a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+
+
       </div>
+     
       
     </div>
   
@@ -329,18 +363,22 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", function() {
-    selected_categories = `{{ selected_category | safe }}` 
-    console.log("in side load ", selected_categories)
+    selected_categories = {{ selected_category | safe }}
+
+    console.log("in site load ", selected_categories)
     
     const checkboxes = document.querySelectorAll('input[name="select_category"]')
     console.log(checkboxes)
 
     
     selected_categories.forEach((element) => {
-      console.log(element)
+    //  console.log(document.getElementById(element))
+      // if (!document.getElementById(element).checked)
+      //    document.getElementById(element).checked = true
+      console.log(document.getElementById(`select_category${element}`))
+      if(!document.getElementById(`select_category${element}`).checked)
+          document.getElementById(`select_category${element}`).checked = true
     });
-
-    
 
   }, false);
  </script>
