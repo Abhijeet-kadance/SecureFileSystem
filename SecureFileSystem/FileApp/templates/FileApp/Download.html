@@ -331,7 +331,7 @@
             
             {% for n in totalPageList %}
               
-                <li class="page-item"><a class="page-link" type="submit" href="/download?page={{n}}">{{ n  }}</a></li>
+                <li class="page-item"><a class="page-link"  type="submit" href="/download?page={{n}}">{{ n  }}</a></li>
  
            
             {% endfor %}
@@ -367,9 +367,11 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", function() {
-    selected_categories = {{ selected_category | safe }}
-    var someSession = '<%= Session["selected_categories"].ToString() %>';
-    console.log("Seddion datd a: ",someSession);
+     //selected_categories = {{ selected_category | safe }}
+    selected_categories = {{ request.session.selected_categories|safe }} 
+    // var someSession = 
+    // console.log("Seddion datd a: ",someSession);
+    console.log("Session data : " , {{  request.session.selected_categories|safe }} )
 
     console.log("in site load ", selected_categories)
     
