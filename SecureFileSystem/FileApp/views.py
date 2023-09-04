@@ -219,6 +219,93 @@ def forgot_password_view(request):
 
 
 
+def download_new(request):
+    download_obj = Material.objects.all()
+    download_approval_obj = MaterialApproval.objects.all()
+    download_catergory_obj = MaterialCategory.objects.all().order_by('id')
+    
+    #material_filter_object = Material.objects.filter(Material_CategoryType__in=selected_category)
+   
+
+
+    if request.method == 'POST':
+        print("Download Section Starts ................")
+        if request.POST.get('download_new'):
+            print("Called download Material Section ................")
+            ## FETCHING MATERIAL ID 
+            Materials_id = request.POST.get('download_new')
+            Material_obj = Material.objects.get(pk=Materials_id)
+            User_all_data = MaterialApproval.objects.filter(Requested_User_id=request.user.id)
+            print("User all data : " , User_all_data.values('Material_id'))
+
+            MaterialPerUser = User_all_data.filter(Material_id=Materials_id)
+            if not MaterialPerUser :
+                b = MaterialApproval(Material=Material_obj,Approval_Status="---",Requested_User=request.user)
+                b.save()
+                messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
+                print("Downloaded Successfully")
+            else:
+                messages.error(request, "Document Already Requested !!", extra_tags='danger')           
+                print("Download Requestes Already....")
+                messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
+        else:
+            #messages.error(request, "Please check the terms and condition first !!", extra_tags='danger')           
+            print("Please Select a post request")
+
+
+        if request.POST.get('select_category'):
+            print("Inside Filter method")
+            selected_category = request.POST.getlist('select_category')
+            print(selected_category)
+           
+            request.session['selected_categories'] = selected_category
+            # paginator = Paginator()
+            material_filter_object = Material.objects.filter(Material_CategoryType__in=selected_category)
+            download_obj = material_filter_object
+            
+            print(material_filter_object)
+            paginator = Paginator(material_filter_object,2)
+            page_number = request.GET.get('page')
+            Page_data = paginator.get_page(page_number)
+            totalpages = Page_data.paginator.num_pages
+            # updated_list = [eval(i) for i in selected_category]
+            context = {
+                "download_obj": Page_data,
+                "download_approval_obj":download_approval_obj,
+                "download_catergory_obj":download_catergory_obj,
+                "selected_category":selected_category,
+                "totalPageList":[n+1 for n in range(totalpages)]
+            }
+            return render(request, 'FileApp/Download.html',context)
+        else:
+            messages.error(request, "Please Select a option to filter", extra_tags='danger')           
+            print("Please Select a post request")
+
+    else:
+        print("Please choose file to donwload")
+
+    paginator1 = Paginator(download_obj,2)
+    page_number = request.GET.get('page')
+    Page_data = paginator1.get_page(page_number)
+    totalpages = Page_data.paginator.num_pages
+
+    context = {
+        # 'download_catergory_obj':download_catergory_obj,
+        # 'download_obj':download_obj,
+        "download_obj": Page_data,
+        "download_approval_obj":download_approval_obj,
+        "download_catergory_obj":download_catergory_obj,
+        "totalPageList":[n+1 for n in range(totalpages)],
+    }
+
+    return render(request, 'FileApp/Download.html',context)
+
+
+
+
+
+
+
 def download_view(request):
     download_obj = Material.objects.all()
     download_approval_obj = MaterialApproval.objects.all()

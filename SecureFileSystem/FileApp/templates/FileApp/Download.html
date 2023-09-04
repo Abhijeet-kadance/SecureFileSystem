@@ -66,7 +66,7 @@
                   <i class="fas fa-angle-down"></i>
                 </div>
 
-                <form action="{% url 'download' %}" method="POST" enctype="multipart/form-data">
+                <form action="{% url 'download_new' %}" method="POST" enctype="multipart/form-data">
                   {% csrf_token %}
                   {% for category in download_catergory_obj %}
                   <div>
@@ -87,7 +87,7 @@
                     <button class="btn btn-primary mt-3 me-3" id="filter" name="filter" type="submit" >
                       Filter
                     </button>
-                    <form action="{% url 'download' %}" method="POST" enctype="multipart/form-data">
+                    <form action="{% url 'download_new' %}" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                       <button class="btn btn-primary mt-3" type="submit" name="reset" value="reset">
                         Reset
@@ -161,7 +161,7 @@
               {{ data.Materail_Created_Date }}
             </div>
 
-            <div class="download">
+            <div class="download_new">
               <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Mymodal{{forloop.counter}}" >Download</a>
               <button class="btn btn-primary">Write a Review</button>
             </div> 
@@ -299,7 +299,7 @@
              <div class="modal-footer">
                 <form method="POST">
                    {% csrf_token %}
-                   <input type="checkbox" id="download" name="download" value={{data.id}}  >
+                   <input type="checkbox" id="download_new" name="download_new" value={{data.id}}  >
                    <label for="vehicle1"> I have read the terms and condition and Accept them all..</label>
                    <span>
                       <button type="submit" class="btn btn-primary">
@@ -324,14 +324,14 @@
             {% if download_obj.has_previous %}
             <li class="page-item disabled">
               <span >
-                <a class="page-link" href="/download?page={{ download_obj.previous_page_number }}"> Previous </a> 
+                <a class="page-link" href="/download_new?page={{ download_obj.previous_page_number }}"> Previous </a> 
               </span>
             </li>
             {% endif %}
             
             {% for n in totalPageList %}
               
-                <li class="page-item"><a class="page-link"  type="submit" href="/download?page={{n}}">{{ n  }}</a></li>
+                <li class="page-item"><a class="page-link"  type="submit" href="/download_new?page={{n}}">{{ n  }}</a></li>
  
            
             {% endfor %}
@@ -345,7 +345,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li> -->
             {% if download_obj.has_next %}
             <li class="page-item">
-              <a class="page-link" href="/download?page={{ download_obj.next_page_number }}">Next</a>
+              <a class="page-link" href="/download_new?page={{ download_obj.next_page_number }}">Next</a>
             </li>
             {% endif %}
           </ul>
