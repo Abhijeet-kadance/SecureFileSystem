@@ -87,13 +87,14 @@
                     <button class="btn btn-primary mt-3 me-3" id="filter" name="filter" type="submit" >
                       Filter
                     </button>
-                    <form action="{% url 'download_new' %}" method="POST" enctype="multipart/form-data">
+                    
+                </form>
+                <form action="{% url 'download_new' %}" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                       <button class="btn btn-primary mt-3" type="submit" name="reset" value="reset">
                         Reset
                       </button>
                     </form>
-                </form>
                
               </div>
             </div>

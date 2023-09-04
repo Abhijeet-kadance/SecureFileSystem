@@ -220,6 +220,7 @@ def forgot_password_view(request):
 
 
 def download_new(request):
+
     download_obj = Material.objects.all()
     download_approval_obj = MaterialApproval.objects.all()
     download_catergory_obj = MaterialCategory.objects.all().order_by('id')
@@ -256,7 +257,7 @@ def download_new(request):
         if request.POST.get('select_category'):
             print("Inside Filter method")
             selected_category = request.POST.getlist('select_category')
-            print(selected_category)
+            print("Selected :" ,selected_category)
            
             request.session['selected_categories'] = selected_category
             # paginator = Paginator()
@@ -278,29 +279,68 @@ def download_new(request):
             }
             return render(request, 'FileApp/Download.html',context)
         else:
-            messages.error(request, "Please Select a option to filter", extra_tags='danger')           
+            #messages.error(request, "Please Select a option to filter", extra_tags='danger')           
             print("Please Select a post request")
 
     else:
         print("Please choose file to donwload")
 
-    paginator1 = Paginator(download_obj,2)
-    page_number = request.GET.get('page')
-    Page_data = paginator1.get_page(page_number)
-    totalpages = Page_data.paginator.num_pages
+    if request.POST.get('reset'):
+            print("Inside reset method ....")
+            reset_obj = Material.objects.all()
 
-    context = {
-        # 'download_catergory_obj':download_catergory_obj,
-        # 'download_obj':download_obj,
-        "download_obj": Page_data,
-        "download_approval_obj":download_approval_obj,
-        "download_catergory_obj":download_catergory_obj,
-        "totalPageList":[n+1 for n in range(totalpages)],
-    }
+            try:
+                print("Inside reset session ....")
+                del request.session['selected_categories']
+            except KeyError:
+                pass
 
-    return render(request, 'FileApp/Download.html',context)
+            context = {
+                "download_obj": reset_obj,
+                "download_approval_obj":download_approval_obj,
+                "download_catergory_obj":download_catergory_obj,
+            }
+            return render(request, 'FileApp/Download.html',context)
 
 
+    if 'visited' in request.session:
+        session_data = request.session['selected_categories']
+        print("Sessionnnnnnn :",session_data)
+        material_filter_object = Material.objects.filter(Material_CategoryType__in=session_data)
+        paginator1 = Paginator(material_filter_object,2)
+        page_number = request.GET.get('page')
+        Page_data = paginator1.get_page(page_number)
+        totalpages = Page_data.paginator.num_pages
+        context = {
+                # 'download_catergory_obj':download_catergory_obj,
+                # 'download_obj':download_obj,
+                "download_obj": Page_data,
+                "download_approval_obj":download_approval_obj,
+                "download_catergory_obj":download_catergory_obj,
+                "totalPageList":[n+1 for n in range(totalpages)],
+            }
+
+        return render(request, 'FileApp/Download.html',context)
+    else:
+        request.session['visited'] = True
+        print("Session does not exist")
+        
+        paginator1 = Paginator(download_obj,2)
+        page_number = request.GET.get('page')
+        Page_data = paginator1.get_page(page_number)
+        totalpages = Page_data.paginator.num_pages
+        context = {
+                # 'download_catergory_obj':download_catergory_obj,
+                # 'download_obj':download_obj,
+                "download_obj": Page_data,
+                "download_approval_obj":download_approval_obj,
+                "download_catergory_obj":download_catergory_obj,
+                "totalPageList":[n+1 for n in range(totalpages)],
+            }
+
+        return render(request, 'FileApp/Download.html',context)
+
+        
 
 
 
