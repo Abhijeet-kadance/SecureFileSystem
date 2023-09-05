@@ -218,7 +218,7 @@ def forgot_password_view(request):
 
 
 
-
+@login_required()
 def download_new(request):
 
     download_obj = Material.objects.all()
@@ -249,14 +249,14 @@ def download_new(request):
                 messages.error(request, "Document Already Requested !!", extra_tags='danger')           
                 print("Download Requestes Already....")
                 messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
-        else:
-            #messages.error(request, "Please check the terms and condition first !!", extra_tags='danger')           
-            print("Please Select a post request")
-
-
+        
         if request.POST.get('select_category'):
             print("Inside Filter method")
             selected_category = request.POST.getlist('select_category')
+            if selected_category == '':
+                print("No Selected Category")
+            else:
+                print("selected")
             print("Selected :" ,selected_category)
            
             request.session['selected_categories'] = selected_category
@@ -278,14 +278,8 @@ def download_new(request):
                 "totalPageList":[n+1 for n in range(totalpages)]
             }
             return render(request, 'FileApp/Download.html',context)
-        else:
-            #messages.error(request, "Please Select a option to filter", extra_tags='danger')           
-            print("Please Select a post request")
-
-    else:
-        print("Please choose file to donwload")
-
-    if request.POST.get('reset'):
+        
+        if request.POST.get('reset'):
             print("Inside reset method ....")
             reset_obj = Material.objects.all()
 
@@ -301,10 +295,14 @@ def download_new(request):
                 "download_catergory_obj":download_catergory_obj,
             }
             return render(request, 'FileApp/Download.html',context)
-
+            
+    else:
+        print("Please choose file to donwload")
 
     if 'visited' in request.session:
-        session_data = request.session['selected_categories']
+        print("data :",request.session.get('selected_categories', ''))
+        session_data = request.session.get('selected_categories', '')
+        
         print("Sessionnnnnnn :",session_data)
         material_filter_object = Material.objects.filter(Material_CategoryType__in=session_data)
         paginator1 = Paginator(material_filter_object,2)
