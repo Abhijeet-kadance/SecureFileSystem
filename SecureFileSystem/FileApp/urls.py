@@ -21,4 +21,5 @@ urlpatterns = [
     # path('download_filter',views.download_filter_view,name='download_filter'),
     path('admin_material_approval',views.admin_material_approval,name='admin_material_approval'),
     path('user_download_requests',views.user_download_requests,name='user_download_requests'),
+    path('view_data',views.view_all_data,name='view_all_data'),
 ]

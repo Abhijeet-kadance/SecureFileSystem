@@ -248,7 +248,7 @@ def download_new(request):
             else:
                 messages.error(request, "Document Already Requested !!", extra_tags='danger')           
                 print("Download Requestes Already....")
-                messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
+                # messages.success(request, 'Download request submitted for Approval !!', extra_tags='success')
         
         if request.POST.get('select_category'):
             print("Inside Filter method")
@@ -304,7 +304,13 @@ def download_new(request):
         session_data = request.session.get('selected_categories', '')
         
         print("Sessionnnnnnn :",session_data)
-        material_filter_object = Material.objects.filter(Material_CategoryType__in=session_data)
+        if session_data:
+            print("Session Data Available")
+            material_filter_object = Material.objects.filter(Material_CategoryType__in=session_data)
+        else:
+            print("Session Data Not available")
+            material_filter_object = Material.objects.all()
+        
         paginator1 = Paginator(material_filter_object,2)
         page_number = request.GET.get('page')
         Page_data = paginator1.get_page(page_number)
@@ -322,6 +328,7 @@ def download_new(request):
     else:
         request.session['visited'] = True
         print("Session does not exist")
+        download_obj = Material.objects.all()
         
         paginator1 = Paginator(download_obj,2)
         page_number = request.GET.get('page')
@@ -330,7 +337,7 @@ def download_new(request):
         context = {
                 # 'download_catergory_obj':download_catergory_obj,
                 # 'download_obj':download_obj,
-                "download_obj": Page_data,
+                "download_obj": download_obj,
                 "download_approval_obj":download_approval_obj,
                 "download_catergory_obj":download_catergory_obj,
                 "totalPageList":[n+1 for n in range(totalpages)],
@@ -481,3 +488,10 @@ def user_download_requests(request):
         "download_material_requests": download_material_requests
     }
     return render(request, 'FileApp/user_download_requests.html', context)
+
+
+def view_all_data(request):
+    print("Inside View Data View")
+    All_data = Material.objects.all()
+    print("All Data : " , All_data)
+    return render(request, 'FileApp/NewFile.html')
