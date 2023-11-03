@@ -101,13 +101,18 @@ MEDIA_URL = '/media/'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.mysql', 
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
+        'USER': 'root',
         'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': env('DATABASE_HOST'),  # Or an IP Address that your DB is hosted on
+        # Or an IP Address that your DB is hosted on
+        'HOST': env('DATABASE_HOST'),
         'PORT': '3306',
-    }
+        'OPTIONS': {
+            'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"',
+            'charset': 'utf8mb4'
+        }
+    },
 }
 
 # Password validation
